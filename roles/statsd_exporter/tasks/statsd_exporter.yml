@@ -1,0 +1,57 @@
+---
+- name: "Downnload statsd exporter"
+  get_url:
+    url: "{{ statsd_exporter_url }}"
+    dest: "{{ statsd_download_path }}"
+
+- name: Extract  tar.gz into 
+  ansible.builtin.unarchive:
+    remote_src: yes
+    src: "{{ statsd_download_path }}"
+    dest: "{{ statsd_extraction_dest }}"
+
+- name: Move executable to bin
+  command: "mv {{statsd_extraction_dest}}/{{statsd_exporter_package}}/statsd_exporter {{usr_bin_dir}}/statsd_exporter"
+
+- name: Create a directory if it does not exist
+  file:
+    path: "{{ statsd_config_dir }}"
+    state: directory
+
+- name: Add the user 'prometheus'
+  user:
+    name: prometheus
+    state: present
+    system: yes
+    shell: /bin/bash
+
+- name: Copy Stasd exporter config file
+  template:
+    src: statsd_mapping.j2
+    dest: "{{ statsd_config_dir }}/{{ statsd_config_file_name }}"
+
+- name: Copy Statsd exporter service file
+  template:
+    src: statsd_exporter_service.j2
+    dest: /etc/systemd/system/statsd_exporter.service
+
+- name: just force systemd to reread configs
+  systemd: daemon_reload=yes
+
+- name: Start service statsd_exporter
+  systemd:
+    name: statsd_exporter
+    state: started
+
+- name: enable service statsd_exporter
+  systemd:
+    name: statsd_exporter
+    enabled: yes
+
+- name: Make sure a service is running
+  systemd:
+    state: started
+    name: statsd_exporter
+
+
+

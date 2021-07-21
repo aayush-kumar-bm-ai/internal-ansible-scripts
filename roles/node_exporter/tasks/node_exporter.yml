@@ -1,0 +1,45 @@
+---
+
+- name: "Install Node exporter"
+  get_url:
+    url: "{{ node_exporter_url }}"
+    dest: "{{ node_download_path }}"
+
+- name: Extract  tar.gz into 
+  ansible.builtin.unarchive:
+    remote_src: yes
+    src: "{{ node_download_path }}"
+    dest: "{{ node_extraction_dest }}"
+
+- name: Move executable to bin
+  command: "mv {{node_extraction_dest}}/{{node_exporter_package}}/node_exporter {{usr_bin_dir}}/node_exporter"
+
+- name: Add the user 'prometheus'
+  user:
+    name: prometheus
+    state: present
+    system: yes
+    shell: /bin/bash
+
+- name: Copy node exporter service file
+  template:
+    src: node_exporter_service.j2
+    dest: /etc/systemd/system/node_exporter.service
+
+- name: just force systemd to reread configs
+  systemd: daemon_reload=yes
+
+- name: Start service node_exporter
+  systemd:
+    name: node_exporter
+    state: started
+
+- name: enable service node_exporter
+  systemd:
+    name: node_exporter
+    enabled: yes
+
+- name: Make sure a service is running
+  systemd:
+    state: started
+    name: node_exporter

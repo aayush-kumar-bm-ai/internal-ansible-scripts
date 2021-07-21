@@ -1,0 +1,7 @@
+- hosts: submission-*
+  become: yes
+  tasks:
+  - name: Update system
+    command: "sudo apt-get update"
+  - name: Install EC2 Connect
+    command: "sudo apt-get install ec2-instance-connect"

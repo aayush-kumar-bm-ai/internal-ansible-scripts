@@ -1,0 +1,12 @@
+
+---
+- hosts: ve-app
+  become: yes
+  tasks:
+  - name: Allow 'bright_tech' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%atul'
+    line: '%atul ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'

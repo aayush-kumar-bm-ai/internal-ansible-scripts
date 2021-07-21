@@ -1,0 +1,31 @@
+---
+- hosts: debit-poc
+  become: yes
+  tasks:
+  - name: Install ntp and ntpupdate
+    command: "sed -i 's/#NTP=/NTP=169.254.169.123/' /etc/systemd/timesyncd.conf"
+
+  - name: Some name
+    command: "sudo service systemd-timesyncd restart"
+  #   apt:
+  #     update_cache: yes
+  #     cache_valid_time: 3600
+  #     name: ntp
+
+  # - name: Install ntp and ntpupdate
+  #   apt:
+  #     update_cache: yes
+  #     cache_valid_time: 3600
+  #     name: ntpdate
+  
+  # - name: Restart service filebeat
+  #   systemd:
+  #     name: ntp
+  #     state: restarted
+  
+  # - name: Check the status 
+  #   command: timedatectl
+
+  # - name: disable systemd timesync
+  #   command: 'sudo systemctl stop systemd-timesyncd.service && sudo systemctl disable systemd-timesyncd.service'
+    

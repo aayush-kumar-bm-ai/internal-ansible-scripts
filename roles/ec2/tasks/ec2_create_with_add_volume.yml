@@ -1,0 +1,58 @@
+---
+
+- name: create ec2 instance
+  ec2:
+    key_name: "{{ instance_key_name }}"
+    instance_type: "{{ instance_type }}"
+    image: "{{ ami_id }}"
+    wait: yes
+    vpc_subnet_id: "{{ vpc_subnet_id }}"
+    assign_public_ip: "{{ is_public_ip_needed }}"
+    group_id: "{{ security_group_ids }}"
+    exact_count: "{{ number_of_instances|int }}"
+    count_tag:
+      Name: "{{ instance_name }}"
+    instance_tags:
+      Name: "{{ instance_name }}"
+    region: "{{ instance_region }}"
+    volumes:
+      - device_name: /dev/sda1
+        volume_type: "{{ root_volume_type }}"
+        volume_size: "{{ root_volume_size|int }}"
+  register: ec2
+
+- name: Attach Volume
+  ec2_vol:
+    instance: '{{ item.id }}'
+    volume_size: "{{ additional_volume_size|int }}"
+    volume_type: "{{ additional_volume_type }}"
+    device_name: "{{ additional_volume_device_name }}"
+  loop: "{{ ec2.instances }}"
+  when: additional_volume_needed
+
+- name: Gather information about instance with a tag key Name and value
+  ec2_instance_info:
+    filters:
+      "tag:Name": "{{ instance_name }}"
+      instance-state-name: [ "running"]
+  register: ec2_exits
+  when: "{{ ec2.instances | length }} == 0"
+
+- name: Add new instance to host group
+  add_host:
+    hostname: '{{ item.private_ip }}'
+    ansible_connection: ssh
+    ansible_python_interpreter: /usr/bin/python3.6
+    ansible_user: ubuntu
+    groups: plan-core-hosts
+  loop: "{{ ec2.instances }}"
+
+- name: Add existing instance to host group
+  add_host:
+    hostname: '{{ item.private_ip_address }}'
+    ansible_connection: ssh
+    ansible_user: ubuntu
+    ansible_python_interpreter: /usr/bin/python3.6
+    groups: plan-core-hosts
+  loop: "{{ ec2_exits.instances }}"
+  when: "{{ ec2.instances | length }} == 0 and {{ ec2_exits | length }} > 0"

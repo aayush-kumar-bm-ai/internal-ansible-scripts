@@ -1,0 +1,8 @@
+---
+# handlers file for ossec-agent
+
+- name: restart ossec
+  service:
+    name: ossec
+    state: restarted
+    enabled: yes

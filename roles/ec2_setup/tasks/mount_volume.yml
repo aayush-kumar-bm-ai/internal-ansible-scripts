@@ -1,0 +1,80 @@
+---
+- name: Make sure we have a 'bright_tech' group
+  group:
+    name: bright_tech
+    state: present
+
+- name: Add sudoers users to bright_tech group
+  user:
+    name=bright_tech
+    groups=bright_tech
+    append=yes
+    state=present
+    shell=/bin/bash
+    createhome=yes
+
+- name: Allow 'bright_tech' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%bright_tech'
+    line: '%bright_tech ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: Create app directory
+  become: yes
+  file: 
+    path: /app
+    state: directory
+
+- name: List volumes
+  command: lsblk
+
+- name: Get specific info volumes
+  command: sudo file -s /dev/nvme1n1
+
+- name: Get info about attached volumes
+  command: sudo lsblk -f
+
+- name: Convert to file system
+  command: sudo mkfs -t xfs /dev/nvme1n1
+
+- name: Mount app directory
+  command: sudo mount /dev/nvme1n1 /app
+
+- name: change ownership of /app
+  command: chown bright_tech:users /app
+
+- name: Create Log directories
+  become_user: bright_tech
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - /app/logs
+    - /app/deploy
+    - /app/logs/gunicorn/
+    - /app/logs/celery/
+    - /app/logs/nginx/
+    
+- name: Give perimission to /app
+  command: 'sudo chmod 777 -R /app'
+
+- name: Copy existing fstab
+  command: 'sudo cp /etc/fstab /etc/fstab.orig'
+
+- name: Get UUID of attached volume
+  shell: sudo blkid | grep dev/nvme1n1 | grep -oP '(?<=UUID=").*?(?=" TYPE)'
+  register: uuid
+
+  #
+- name: output
+  debug:
+    msg: "{{ uuid.stdout_lines[0] }}"
+    
+- name: Adding uuid to /etc/fstab
+  blockinfile:
+    path: /etc/fstab
+    content: |
+      UUID={{ uuid.stdout_lines[0] }}  /app  xfs  defaults,nofail  0  2
+

@@ -1,0 +1,13 @@
+---
+- hosts: ve-app
+  become: yes
+  tasks:
+  - name: Install nginx
+    apt:
+      name: nginx
+      state: present
+      
+  - name: start nginx
+    service:
+        name: nginx
+        state: started

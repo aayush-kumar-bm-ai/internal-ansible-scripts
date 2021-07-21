@@ -1,0 +1,14 @@
+---
+
+- name: Create a target group with instance targets
+  elb_target_group:
+    name: "{{ target_group_name }}"
+    protocol: "{{ target_protocol }}"
+    port: "{{ target_port|int }}"
+    vpc_id: "{{ target_vpc_id }}"
+    health_check_protocol: "{{ health_check_protocol }}"
+    health_check_path: "{{ health_check_path }}"
+    targets:
+      - Id: "{{ default_target_instance_id }}"
+        Port: "{{ default_target_instance_port|int }}"
+    state: present

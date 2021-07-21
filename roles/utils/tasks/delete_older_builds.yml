@@ -1,0 +1,5 @@
+- hosts: backend-app
+  become_user: bright_tech
+  tasks:
+  - name: Install nginx
+    command: "rm -rf /app/deploy/0.1.*"

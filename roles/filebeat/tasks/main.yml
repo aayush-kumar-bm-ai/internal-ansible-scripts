@@ -1,0 +1,4 @@
+---
+
+- name: Install filebeat
+  include_tasks: filebeat.yml

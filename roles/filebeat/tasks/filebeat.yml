@@ -1,0 +1,82 @@
+---
+
+- name: Check previous installation
+  stat:
+    path: "/etc/filebeat/"
+  register: filebeat
+
+- name: Check previous installation config
+  stat:
+    path: "/etc/filebeat/filebeat.yml"
+  register: filebeat_config
+
+- name: Take a backup of old config file
+  become: yes
+  command: mv /etc/filebeat/filebeat.yml /etc/filebeat/filebeat_bkp.yml
+  ignore_errors: yes
+  when: filebeat_config.stat.exists
+
+- name: Check previous installation
+  stat:
+    path: "/tmp/filebeat.deb"
+  register: filebeat_deb
+
+- name: Take a backup of old config file
+  become: yes
+  command: "rm /tmp/filebeat.deb"
+  ignore_errors: yes
+  when: filebeat_deb.stat.exists
+
+- name: Remove older versions if exist
+  become: yes
+  command: "dpkg -r filebeat"
+  ignore_errors: yes
+  when: filebeat.stat.exists
+
+- name: Remove older versions files if exist
+  become: yes
+  command: "dpkg --purge filebeat"
+  ignore_errors: yes
+  when: filebeat.stat.exists
+
+- name: Download file beat
+  get_url:
+    url: "{{ filebeat_download_url }}"
+    dest: "{{ filebeat_download_path }}"
+
+- name: Install filebeat
+  become: yes
+  shell: dpkg -i "{{ filebeat_download_path }}"
+  async: 15
+  poll: 5
+
+- name: Touch file
+  file:
+    path: /etc/filebeat/filebeat.yml
+    state: touch
+
+- name: Copy filebeat.yml
+  template:
+    src: filebeat_config.j2
+    dest: /etc/filebeat/filebeat.yml
+
+- name: Create inputs directory
+  file:
+    path: "/etc/filebeat/inputs.d"
+    state: directory
+
+- name: Template all the templates and place them in the corresponding path
+  template:
+    src: "{{ item.src }}"
+    dest: "/etc/filebeat/inputs.d/{{ item.path | regex_replace('\\.j2$', '.yml') }}"
+    force: yes
+  with_filetree: "{{role_path}}/templates"
+  when: item.state == 'file' and item.path != 'filebeat_config.j2'
+
+- name: just force systemd to reread configs
+  systemd: daemon_reload=yes
+
+- name: Start service filebeat
+  systemd:
+    name: filebeat
+    state: restarted

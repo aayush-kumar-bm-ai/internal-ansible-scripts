@@ -1,0 +1,50 @@
+---
+- hosts: localhost
+  vars_files:
+    - alb_vars.yml
+
+  tasks:
+  - name: Create a target group with instance targets
+    elb_target_group:
+      name: "{{ target_group_name }}"
+      protocol: "{{ target_protocol }}"
+      port: "{{ target_port | int}}"
+      vpc_id: "{{ target_vpc_id }}"
+      health_check_protocol: "{{ health_check_protocol }}"
+      health_check_path: "{{ health_check_path }}"
+      targets:
+        - Id: "{{ item.value.instance_id }}"
+          Port: "{{ item.value.instance_port|int }}"
+      state: present
+      wait_timeout: 300
+      wait: True
+    loop: "{{ lookup('dict', target_instance_ids, wantlist=True) }}"
+
+  - name: Create Load Balancer
+    community.aws.elb_application_lb:
+      name: "{{ load_balancer_name }}"
+      security_groups: "{{ security_groups }}"
+      subnets: "{{ subnet_ids }}"
+      scheme: "{{ load_balancer_scheme }}"
+      listeners:
+        - Protocol: "{{ item.value.protocol }}"
+          Port:  "{{ item.value.port | int}}"
+          SslPolicy: "{{ item.value.ssl_policy }}"
+          Certificates: 
+            - CertificateArn: "{{ item.value.certificate_arn }}"
+          DefaultActions:
+            - Type: "{{ item.value.default_actions_type }}"
+              TargetGroupName: "{{ item.value.default_actions_target_group }}"
+        - Protocol: HTTP
+          Port: 80
+          DefaultActions:
+            - Type: redirect
+              RedirectConfig:
+                Host: "#{host}"
+                Path: "/#{path}"
+                Port: "443"
+                Protocol: "HTTPS"
+                Query: "#{query}"
+                StatusCode: "HTTP_301"
+      state: present
+    loop: "{{ lookup('dict', load_balancer_listeners, wantlist=True) }}"

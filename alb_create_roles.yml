@@ -1,0 +1,8 @@
+---
+
+- name: Create Ec2 instance
+  hosts: localhost
+  vars_files:
+    - alb_vars.yml
+  roles:
+    - alb

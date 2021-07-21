@@ -1,0 +1,33 @@
+{
+  "global_parameters": [
+    {"name": "cluster_name", "value": "brightmoney-rabbit"}
+  ],
+  "permissions": [
+    {
+      "configure": ".*",
+      "read": ".*",
+      "user": "bright_admin",
+      "vhost": "/",
+      "write": ".*"
+    }
+  ],
+  "policies": [
+    {
+      "apply-to": "queues",
+      "definition": {"ha-mode": "all"},
+      "name": "ha-all",
+      "pattern": ".*",
+      "priority": 0,
+      "vhost": "/"
+    },
+    {
+      "apply-to": "queues",
+      "definition": {"ha-mode": "all"},
+      "name": "ha-all",
+      "pattern": ".*",
+      "priority": 0,
+      "vhost": "experimentation"
+    }
+  ],
+  "vhosts": [{"name": "/"}]
+}

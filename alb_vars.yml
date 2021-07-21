@@ -1,0 +1,26 @@
+  target_vpc_id: vpc-057af574e13d691a2
+  target_protocol: http
+  target_port: 80
+  target_group_name: submission-prod-int-target-grp
+  health_check_path: /
+  health_check_protocol: http
+  health_check_port: 80
+  default_target_instance_id: i-0e544182d46ba3715
+  default_target_instance_port: 80
+  additional_targets_present: false
+  additional_targets:
+     instance_0:
+       instance_id: i-067c9135617a19842
+       instance_port: 80
+  load_balancer_name: prod-submission-svc-int-alb
+  load_balancer_scheme: internal
+  security_groups: ["sg-09bba6b3dea3a54a9"]
+  subnet_ids: ["subnet-05d0a8453b63687a4", "subnet-0954001a4ead32ea4"]
+  load_balancer_listeners:
+    listener_1:
+      protocol: HTTPS
+      port: 443
+      ssl_policy: ELBSecurityPolicy-2016-08
+      certificate_arn: arn:aws:acm:us-west-2:294639299176:certificate/452a1f65-3261-4952-b035-aef2afa18fab
+      default_actions_type: forward
+      default_actions_target_group: '{{ target_group_name }}'

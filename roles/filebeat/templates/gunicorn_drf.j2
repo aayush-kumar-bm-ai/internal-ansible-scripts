@@ -1,0 +1,21 @@
+- type: log
+  processors:
+    - dissect:
+        tokenizer: "[%{?u} %{?v}] [LEVEL]: %{log_level}, [LOG_TYPE]: %{log_type}, [FILE_PATH]: %{file_path}, [LINE]: %{line_no}, [FUNC]: %{function_name}, [MSG]: %{extracted_message}"
+        field: "message"
+        target_prefix: ""
+    - decode_json_fields:
+        fields: ["extracted_message"]
+        target: ""
+    - rename:
+        fields:
+          - from: path
+            to: url_path
+        fail_on_error: false
+        ignore_missing: true
+    - drop_fields:
+        fields: ["extracted_message", "message"]
+  enabled: true
+  paths:
+    - "{{ gunicorn_logs_path }}"
+  include_lines: ['\[LOG_TYPE\]: drf_tracking']

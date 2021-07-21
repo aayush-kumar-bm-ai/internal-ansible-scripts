@@ -1,0 +1,8 @@
+---
+- name: Register an IP address target to a target group
+  community.aws.elb_target:
+    target_group_name: "{{ target_group_name }}"
+    target_id: "{{ item.value.instance_id }}"
+    target_port: "{{ item.value.instance_port|int }}"
+    state: present
+  loop: "{{ lookup('dict', additional_targets, wantlist=True) }}"

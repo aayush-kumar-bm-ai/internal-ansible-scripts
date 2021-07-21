@@ -1,0 +1,27 @@
+target_vpc_id: VPC_ID
+target_protocol: http
+target_port: 80
+target_group_name: TARGET_GROUP_NAME #Not more than 32 characters
+health_check_path: /
+health_check_protocol: http
+health_check_port: 80
+target_instance_ids:
+  instance_0:
+    instance_id: INSTANCE_ID
+    instance_port: 80
+# Add more instances as below
+#  instance_1:
+#    instance_id: 
+#    instance_port: 80
+load_balancer_name: LOAD_BALANCER_NAME #Not more than 32 characters
+load_balancer_scheme: LOAD_BALANCER_SCHEME  # internal or internet-facing
+security_groups: ["SECURITY_GROUP_1", "SECURITY_GROUP_2"]
+subnet_ids: ["SUBNET_1", "SUBNET_2"]
+load_balancer_listeners:
+  listener_1:
+    protocol: HTTPS
+    port: 443
+    ssl_policy: ELBSecurityPolicy-2016-08
+    certificate_arn: arn:aws:acm:us-west-2:294639299176:certificate/452a1f65-3261-4952-b035-aef2afa18fab
+    default_actions_type: forward
+    default_actions_target_group: '{{ target_group_name }}'

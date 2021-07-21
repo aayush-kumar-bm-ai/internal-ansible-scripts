@@ -1,0 +1,15 @@
+---
+
+- name: Print
+  debug:
+    msg: "{{ item.path }}"
+  with_filetree: "{{role_path}}/templates"
+  when: item.state == 'file' and item.path != 'filebeat_config.j2'
+
+- name: Template all the templates and place them in the corresponding path
+  template:
+    src: "{{ item.src }}"
+    dest: "/etc/filebeat/inputs.d/{{ item.path | regex_replace('\\.j2$', '.yml') }}"
+    force: yes
+  with_filetree: "{{role_path}}/templates"
+  when: item.state == 'file' and item.path != 'filebeat_config.j2'

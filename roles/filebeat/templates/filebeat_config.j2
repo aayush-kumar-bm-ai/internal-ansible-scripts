@@ -1,0 +1,32 @@
+filebeat.config:
+  inputs:
+    enabled: true
+    path: inputs.d/*.yml
+    reload.enabled: true
+    reload.period: 10s
+
+filebeat.registry.path: /etc/filebeat/registry
+json.keys_under_root: true
+fields: {log_type: osseclogs}
+output.elasticsearch:
+  hosts: ["http://10.0.25.241:80"]
+  enabled: true
+  indices:
+    - index: "ossec-logs-%{[host.name]}-%{+yyyy.MM.dd}"
+      when.contains:
+        log_type: ossec-logs
+    - index: "{{ app_name }}-drf-tracking-{{ env }}-%{[agent.name]}-%{+yyyy.MM.dd}"
+      when.contains:
+        log_type: drf_tracking
+    - index: "{{ app_name }}-app-log-{{ env }}-%{[agent.name]}-%{+yyyy.MM.dd}"
+      when.contains:
+        log_type: app
+    - index: "{{ app_name }}-celery-log-{{ env }}-%{[agent.name]}-%{+yyyy.MM.dd}"
+      when.contains:
+        log_type: celery
+    - index: "{{ app_name }}-{{ env }}-nginx-error-log-%{+yyyy.MM.dd}"
+      when.contains:
+        log_type: nginx-err
+    - index: "{{ app_name }}-{{ env }}-nginx-access-log-%{+yyyy.MM.dd}"
+      when.contains:
+        log_type: nginx-access

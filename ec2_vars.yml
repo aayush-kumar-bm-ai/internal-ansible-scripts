@@ -1,0 +1,19 @@
+---
+instance_name: d-ems-v2-01
+instance_key_name: backend-16-08-19
+ami_id: ami-09a0ee73dd16c0fc5
+instance_type: c5.xlarge
+instance_region: us-west-2
+vpc_subnet_id: subnet-03e86548fbbfcbf2a
+security_group_ids: ["sg-0d2c34bb1cc93d18e"]
+root_volume_type: gp2
+root_volume_size: 30
+number_of_instances: 1
+is_public_ip_needed: false
+addition_volume_needed: false
+additional_volume_size: 128
+additional_volume_type: gp2
+additional_volume_device_name: /dev/sdd
+nginx_needed: true
+python_version: 3.8
+

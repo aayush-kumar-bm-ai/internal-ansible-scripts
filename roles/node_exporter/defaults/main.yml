@@ -1,0 +1,6 @@
+---
+node_exporter_url: https://github.com/prometheus/node_exporter/releases/download/v1.0.1/node_exporter-1.0.1.linux-amd64.tar.gz
+node_download_path: /tmp/node_exporter.tar.gz
+node_extraction_dest: /tmp
+node_exporter_package: node_exporter-1.0.1.linux-amd64 #Enter the package name without .tar.gz
+usr_bin_dir: /usr/local/bin

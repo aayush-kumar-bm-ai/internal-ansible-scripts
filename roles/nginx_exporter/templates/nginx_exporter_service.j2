@@ -1,0 +1,10 @@
+[Unit]
+Description=Nginx Exporter
+After=network.target
+[Service]
+User=ubuntu
+Group=ubuntu
+Type=simple
+ExecStart=/usr/local/bin/nginx-prometheus-exporter -nginx.scrape-uri={{ nginx_metrics_url }}
+[Install]
+WantedBy=multi-user.target

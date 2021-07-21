@@ -1,0 +1,264 @@
+[localhost]
+localhost ansible_connection=local ansible_python_interpreter=python
+
+[backend-app] #-- group name
+10.100.96.30    ansible_connection=ssh        ansible_user=ubuntu
+10.100.100.228    ansible_connection=ssh        ansible_user=ubuntu
+10.100.103.211    ansible_connection=ssh        ansible_user=ubuntu
+
+[backend-celery]
+10.100.101.71    ansible_connection=ssh        ansible_user=ubuntu
+10.100.99.222   ansible_connection=ssh        ansible_user=ubuntu
+10.100.98.253    ansible_connection=ssh        ansible_user=ubuntu
+
+[ems-app]
+10.100.102.155    ansible_connection=ssh        ansible_user=ubuntu
+10.100.99.11    ansible_connection=ssh        ansible_user=ubuntu
+
+[ems-celery]
+10.100.97.62    ansible_connection=ssh        ansible_user=ubuntu
+10.100.97.74    ansible_connection=ssh        ansible_user=ubuntu
+
+[ucb-app]
+10.100.100.118   ansible_connection=ssh        ansible_user=ubuntu
+10.100.103.52    ansible_connection=ssh        ansible_user=ubuntu
+10.100.100.95  ansible_connection=ssh        ansible_user=ubuntu
+10.100.98.208   ansible_connection=ssh        ansible_user=ubuntu
+
+[ucb-celery]
+10.100.100.159    ansible_connection=ssh        ansible_user=ubuntu
+10.100.99.121   ansible_connection=ssh        ansible_user=ubuntu
+
+[gateway-app]
+10.100.101.66    ansible_connection=ssh        ansible_user=ubuntu
+10.100.97.211   ansible_connection=ssh        ansible_user=ubuntu
+
+[gateway-celery]
+10.100.97.84   ansible_connection=ssh        ansible_user=ubuntu
+10.100.102.92   ansible_connection=ssh        ansible_user=ubuntu
+
+[gateway-lb]
+10.100.102.231   ansible_connection=ssh        ansible_user=ubuntu
+
+[experimentation-prod]
+10.100.98.241    ansible_connection=ssh        ansible_user=ubuntu    ansible_python_interpreter=/usr/bin/python3
+10.100.100.12  ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+
+[junk-dev]
+10.0.28.81  ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+
+[nginx-lb]
+10.50.81.131  ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+10.100.102.86 ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+10.100.102.231 ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+10.100.99.204 ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+
+[payments-app]
+10.50.75.162  ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.50.92.83  ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+[payments-celery]
+10.50.69.97 ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.50.82.140  ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+[payments-beat]
+10.50.80.27 ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+[lb]
+10.50.81.131  ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+
+
+[be-reserve-box]
+172.31.5.213    ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[old-ve-app]
+172.31.55.85    ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[platform-servers]
+10.100.100.161  ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+10.100.103.234 ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+10.100.99.5 ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+
+[frontend-prod]
+10.100.102.206 ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+[frontend-dev]
+10.0.11.233 ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+[frontend-stage]
+10.0.31.54 ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+
+[airflow]
+172.31.12.64 ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+
+[ve-app]
+10.100.100.46  ansible_connection=ssh        ansible_user=ubuntu  ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.100.191    ansible_connection=ssh        ansible_user=ubuntu  ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[ve-celery]
+10.100.102.65  ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.102.64  ansible_connection=ssh        ansible_user=ubuntu   ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[nginx-ve-lb]
+10.100.102.144  ansible_connection=ssh        ansible_user=ubuntu   ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[backend-stage]
+10.0.0.163 ansible_connection=ssh        ansible_user=ubuntu   ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[backend-new-beat]
+10.100.102.86 ansible_connection=ssh        ansible_user=ubuntu   ansible_python_interpreter=/usr/bin/python3
+
+[transunion-dev]
+10.0.16.169 ansible_connection=ssh        ansible_user=ubuntu   ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[transunion-prod]
+10.100.100.154 ansible_connection=ssh        ansible_user=ubuntu   ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[kyc-app]
+10.100.101.244  ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.96.173  ansible_connection=ssh        ansible_user=ubuntu   ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[credit-app]
+10.50.83.204  ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.50.70.180  ansible_connection=ssh        ansible_user=ubuntu   ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[credit-celery]
+10.50.92.136  ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.50.88.178  ansible_connection=ssh        ansible_user=ubuntu   ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[credit-beat]
+10.50.88.143  ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[bwg-app]
+10.100.100.112 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.101.178  ansible_connection=ssh        ansible_user=ubuntu   ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[bwg-celery]
+10.100.103.44  ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.102.29  ansible_connection=ssh        ansible_user=ubuntu   ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[prometheus]
+10.100.103.81  ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[backend-new-app]
+10.100.97.34 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[metabase-app]
+10.100.102.201 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[credit-recon-lb]
+10.50.65.213    ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.50.75.24  ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[assetmgr-app]
+10.100.101.205 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.98.189  ansible_connection=ssh        ansible_user=ubuntu   ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[assetmgr-celery]
+10.100.100.248 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.102.36  ansible_connection=ssh        ansible_user=ubuntu   ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[rightfoot]
+10.50.66.81 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[debit-poc]
+10.50.0.232 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[app-gateway-new]
+172.31.3.1 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+172.31.15.80 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[equifax-celery]
+10.100.99.125 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.96.135 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[savings-app]
+10.50.72.100 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.50.94.16 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[savings-celery]
+10.50.69.189 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.50.69.189 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[assetmgr-dev]
+10.0.20.225 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+[uaa-dev]
+10.0.31.21 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[recon-app]
+10.50.76.128 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.50.88.184 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[recon-celery]
+10.50.81.112 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.50.66.98 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[recon-beat]
+10.50.67.109 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[uaa-core-dev]
+10.0.27.220 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+
+[firestore-app]
+10.100.97.84 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.102.92 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[firestore-celery]
+10.100.97.208 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.101.247 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.96.56 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[app-gw]
+10.100.101.66 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.97.211 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[goal-dev]
+10.0.20.71 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.0.19.177 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[entity-dev]
+10.0.6.28   ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[stage-appgw]
+10.0.30.174 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.0.6.113 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[d-submission]
+10.0.27.68 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[submission-app]
+10.100.103.102 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.102.72 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+[submission-celery]
+10.100.100.199 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.96.79 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+[submission-beat]
+10.100.99.237   ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[ami-standard]
+10.0.20.197   ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.0.45.238   ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[p-entity-app]
+10.100.102.186   ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.96.213   ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+[p-entity-celery]
+10.100.98.32   ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.100.97.49   ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[d-firestore-celery]
+10.0.5.23   ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[backend-celery-new]
+10.100.96.211   ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[d-collection]
+10.0.21.16  ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[d-allocation]
+10.0.30.119 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[d-plan-executor]
+10.0.13.117 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[airflow-prod]
+10.100.97.221 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[narada-dev]
+10.0.12.12 ansible_connection=ssh        ansible_user=ubuntu    ansible_ssh_common_args='-o StrictHostKeyChecking=no'

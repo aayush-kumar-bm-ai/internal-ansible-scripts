@@ -1,0 +1,11 @@
+---
+- name: Create Target Group
+  include_tasks: target_group.yml
+
+- name: Add aditional targets
+  include_tasks: additional_targets.yml
+  when: additional_targets_present
+
+- name: Create Load Balancer
+  include_tasks: alb_create.yml
+

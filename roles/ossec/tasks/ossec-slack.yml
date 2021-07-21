@@ -1,0 +1,26 @@
+---
+
+- name: Check previous slack
+  stat:
+    path: "/app/ossec/active-response/bin/ossec-slack.sh"
+  register: ossec_slack
+
+- name: Take a backup of old config file
+  become: yes
+  command: mv /app/ossec/active-response/bin/ossec-slack.sh /app/ossec/active-response/bin/ossec-slack_bkp
+  when: ossec_slack.stat.exists
+
+- name: Copy the slack-config file
+  template: 
+    src: "ossec-slack.j2" 
+    dest: "/app/ossec/active-response/bin/ossec-slack.sh"
+    mode: a+x
+
+- name: 'Restart OSSEC'
+  command: "/app/ossec/bin/ossec-control restart"
+
+- name: restart ossec
+  service:
+    name: ossec
+    state: restarted
+    enabled: yes

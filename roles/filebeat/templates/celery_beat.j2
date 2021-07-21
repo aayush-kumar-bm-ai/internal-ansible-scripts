@@ -1,0 +1,13 @@
+  - type: log
+    processors:
+      - add_fields:
+          target: ""
+          fields:
+            log_type: "celery_beat"
+    enabled: true
+    multiline.pattern: '^\['
+    multiline.negate: true
+    multiline.match: after
+    paths:
+      - "/app/logs/celery_beat/celery*.log"
+    exclude_lines: ["/bright_commons/utils/logger.py"]

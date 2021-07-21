@@ -1,0 +1,9 @@
+- type: log
+  enabled: true
+  processors:
+  - add_fields:
+          target: ""
+          fields:
+            log_type: "ossec-logs"
+  paths:
+    - "{{ ossec_logs_path }}"

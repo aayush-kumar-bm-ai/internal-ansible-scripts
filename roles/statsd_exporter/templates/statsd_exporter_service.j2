@@ -1,0 +1,10 @@
+[Unit]
+Description=Statsd Exporter
+After=network.target
+[Service]
+User=prometheus
+Group=prometheus
+Type=simple
+ExecStart={{usr_bin_dir}}/statsd_exporter --statsd.mapping-config={{statsd_config_dir}}/{{statsd_config_file_name}} --statsd.listen-udp=":9125" --statsd.listen-tcp=":9125" --log.level=info --statsd.event-flush-interval=200ms
+[Install]
+WantedBy=multi-user.target

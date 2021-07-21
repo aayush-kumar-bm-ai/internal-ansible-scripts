@@ -1,0 +1,29 @@
+---
+- name: Create Load Balancer
+  community.aws.elb_application_lb:
+    name: "{{ load_balancer_name }}"
+    security_groups: "{{ security_groups }}"
+    subnets: "{{ subnet_ids }}"
+    scheme: "{{ load_balancer_scheme }}"
+    listeners:
+      - Protocol: "{{ item.value.protocol }}"
+        Port:  "{{ item.value.port |int }}"
+        SslPolicy: "{{ item.value.ssl_policy }}"
+        Certificates: 
+          - CertificateArn: "{{ item.value.certificate_arn }}"
+        DefaultActions:
+          - Type: "{{ item.value.default_actions_type }}"
+            TargetGroupName: "{{ item.value.default_actions_target_group }}"
+      - Protocol: HTTP
+        Port: 80
+        DefaultActions:
+          - Type: redirect
+            RedirectConfig:
+              Host: "#{host}"
+              Path: "/#{path}"
+              Port: "443"
+              Protocol: "HTTPS"
+              Query: "#{query}"
+              StatusCode: "HTTP_301"
+    state: present
+  loop: "{{ lookup('dict', load_balancer_listeners, wantlist=True) }}"

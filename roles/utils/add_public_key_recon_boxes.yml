@@ -1,0 +1,10 @@
+---
+- hosts: recon-*
+  become: yes
+
+  tasks:
+  - name: Adding Public Key
+    blockinfile:
+      path: /home/ubuntu/.ssh/authorized_keys
+      content: |
+        ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCrXBjgW14t8dz3bwFhPp+aOloA3jaCjjBUfb7sYBBG/aGKrjCcXKqqQGYQSWiq2zhrpaCJZCwO9O8KCntaY6G5rlFfpt0HfPOBMGhZ7XQROAQELL5ipJxulHPcGWT6J54+UQw+mxDIgZkBkQUhwTVdBHBFmFNk1AV4qcjq8H7kZQZTo3Pg108hnrhiMUZxU+FmbyQQWYrxHF3kpOoMGigenQGt/yfqg02K4Ge0VI+Hs0x4CKY+9qblflCXK+9PW9wWXU3Tf+4Fbv9T3AxJRWLoNttfMa4IMQHPBFAlAEiSv3yMp3NmUu10BMCmMaWewQ/R++Qu3j48sOO+j7RRVZ1GGxix57hdGXqNYBj7BW7MigSCusAI9+VPpNQKObQZLzRsH/ILw09sV5K38OsiKNu4/Mf1DR/NFZst/YpLjGr//bwsRABDyddzgmrdwYbifGAB2IZ0ONTl78s1DH0nlFQqgsKx9/F53XnnW6pi6C+eV0NeujEZkBEFdNpQhLaf5cU= kiran@Kirankumars-MacBook-Pro.local

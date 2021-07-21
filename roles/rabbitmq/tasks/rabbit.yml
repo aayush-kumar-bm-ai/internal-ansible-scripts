@@ -1,0 +1,95 @@
+---
+
+- name: (OSSEC) Update repositories cache and install required packages
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - gcc
+    - make
+    - build-essential
+    - python3-setuptools
+    - python3-pexpect
+    - apt-transport-https
+    - libssl-dev 
+    - libpcre2-dev
+    - zlib1g-dev
+    - libevent-dev
+  tags:
+    - packages
+
+- name: "Download Ossec "
+  get_url:
+    url: https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
+    dest: /tmp/3.6.0.tar.gz
+
+- name: Extract  tar.gz 
+  ansible.builtin.unarchive:
+    remote_src: yes
+    src: /tmp/3.6.0.tar.gz
+    dest: /tmp/
+  
+- name: "Download pcre library"
+  get_url:
+    url: https://ftp.pcre.org/pub/pcre/pcre2-10.32.tar.gz
+    dest: /tmp/ossec-hids-3.6.0/pcre2-10.32.tar.gz
+
+- name: Extract  pcre.tar.gz 
+  ansible.builtin.unarchive:
+    remote_src: yes
+    src: /tmp/ossec-hids-3.6.0/pcre2-10.32.tar.gz
+    dest: /tmp/ossec-hids-3.6.0/src/external/
+
+- name: Check previous installation in 
+  stat:
+    path: "/app/ossec/bin/ossec-control"
+  register: ossec
+
+- name: Remove old installation if exist
+  command: chdir=/var/ rm -rf ossec
+  
+- name: Copy the Ossec_input file
+  template: 
+    src: "ossec_client_input.j2" 
+    dest: "/tmp/ossec-hids-3.6.0/ossec_client_input.txt"
+  when: not ossec.stat.exists
+
+- name: Copy the Ossec_upgrade file
+  template: 
+    src: "ossec_client_upgrade.j2" 
+    dest: "/tmp/ossec-hids-3.6.0/ossec_client_input.txt"
+  when: ossec.stat.exists
+
+- name: Install OssecAgent 
+  shell: sudo bash /tmp/ossec-hids-3.6.0/install.sh < /tmp/ossec-hids-3.6.0/ossec_client_input.txt 
+
+- name: (OSSEC) Copy the ossec config file to ossec servers
+  template:
+    src: "ossec_server.j2"
+    dest: "/app/ossec/etc/ossec.conf"
+  
+- name: (OSSEC) Copy the ossec rules file to ossec servers
+  template:
+    src: local_rules.j2
+    dest: /app/ossec/rules/local_rules.xml
+
+- name: Removing existing syslog_rules
+  file:
+    path: /app/ossec/rules/syslog_rules.xml
+    state: absent
+
+- name: (OSSEC) Copy syslog ossec rules file to ossec servers
+  template:
+    src: syslog_rules.j2
+    dest: /app/ossec/rules/syslog_rules.xml
+
+- name: 'Restart OSSEC'
+  command: "/app/ossec/bin/ossec-control start"
+
+- name: restart ossec
+  service:
+    name: ossec
+    state: restarted
+    enabled: yes

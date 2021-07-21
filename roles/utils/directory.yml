@@ -1,0 +1,28 @@
+---
+- hosts: payments-beat
+  become: yes
+
+  tasks:
+  - name: Create app directory
+    become: yes
+    file: 
+      path: /app
+      state: directory
+  
+  - name: change owner ship of /app
+    command: chown bright_tech:users /app
+
+  - name: Create Log directories
+    become_user: bright_tech
+    file:
+      path: "{{ item }}"
+      state: directory
+    loop:
+      - /app/logs
+      - /app/deploy
+      - /app/logs/gunicorn/
+      - /app/logs/celery/
+      - /app/logs/nginx/
+      
+  - name: Give perimission to /app
+    command: 'sudo chmod 777 -R /app'

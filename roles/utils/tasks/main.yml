@@ -1,0 +1,4 @@
+---
+
+- name: Restart Filebeat
+  include_tasks: restart_filebeat.yml

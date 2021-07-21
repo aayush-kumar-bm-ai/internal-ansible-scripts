@@ -1,0 +1,15 @@
+---
+
+- name: Mount Volume
+  include_tasks: mount_volume.yml
+  when: additional_volume_needed and is_mounting_volume_needed
+
+- name: EC2 Connect
+  include_tasks: ec2_connect_setup.yml
+
+- name: Add PIP conf
+  include_tasks: add_pip_conf.yml
+  
+- name: Install Nginx
+  include_tasks: nginx.yml
+  when: nginx_needed

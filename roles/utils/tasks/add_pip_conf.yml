@@ -1,0 +1,15 @@
+---
+- hosts: uaa-core-dev
+  become: yes
+  tasks:
+  - name: Touch file
+    file:
+      path: /etc/pip.conf
+      state: touch
+
+  - name: Adding pip.conf Key
+    blockinfile:
+      path: /etc/pip.conf
+      content: |
+        [global]
+        extra-index-url=https://bright:TheFutureBank2030@pypi.brightmoney.co/simple
