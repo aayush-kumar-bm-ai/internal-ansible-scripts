@@ -17,33 +17,33 @@ More installation details: [Installing Ansible](https://docs.ansible.com/ansible
 ## Setting up environment to run ansible scripts
 - Clone the repository - ```https://github.com/BrightMoney-AI/bright-ansible-scripts.git```
 - Navigate inside ```bright-ansible-scripts``` directory and you will find the subdirectories with respective service name
-- Navigate inside the desired service directory and it contains the production, dev and staging environment folders
+- Navigate inside the desired service directory and it contains **production, dev and staging** environment folders
 - Go to the desired environment folder
 - And run ```ansible-playbook main.yml -i hosts```
 
 ## Roles
 Ansible role is a set of tasks to configure a host to serve a certain purpose like configuring a service. Roles are defined using YAML files with a predefined directory structure
 A role directory structure contains directories: defaults, vars, tasks, files, templates, meta, handlers. Each directory must contain a main.yml file which contains relevant content. Let’s look little closer to each directory.
-  ** defaults: ** contains default variables for the role. Variables in default have the lowest priority so they are easy to override.
-  ** vars: ** contains variables for the role. Variables in vars have higher priority than variables in defaults directory.
-  ** tasks: ** contains the main list of steps to be executed by the role.
-  ** files: ** contains files which we want to be copied to the remote host. We don’t need to specify a path of resources stored in this directory.
-  ** templates: ** contains file template which supports modifications from the role. We use the Jinja2 templating language for creating templates.
-  ** meta: ** contains metadata of role like an author, support platforms, dependencies.
-  ** handlers: ** contains handlers which can be invoked by “notify” directives and are associated with service.
-  
+
+  1. **defaults:** contains default variables for the role. Variables in default have the lowest priority so they are easy to override.
+  2. **vars:** contains variables for the role. Variables in vars have higher priority than variables in defaults directory.
+  3. **tasks:** contains the main list of steps to be executed by the role.
+  4. **files:** contains files which we want to be copied to the remote host. We don’t need to specify a path of resources stored in this directory.
+  5. **templates:** contains file template which supports modifications from the role. We use the Jinja2 templating language for creating templates.
+  6. **meta:** contains metadata of role like an author, support platforms, dependencies.
+  7. **handlers:** contains handlers which can be invoked by “notify” directives and are associated with service.
   
 In our code we have created ansible roles under ** roles ** directory. The ** roles ** directory has following roles:
-  ** ec2 ** : It helps us to create ec2 instance in AWS with or without additional based on the input specified in ```ec2_vars.yml```
-  ** ec2_setup ** : Helps in mounting volume if additional volume is needed and to make sure pip.conf and ec2_connect are added.
-  ** filebeat ** : Helps in configuring filebeat and also it will install filebeat if not installed earlier
-  ** node_exporter ** : Helps in installing and setting up node exporter service on ec2 instance
-  ** statsd_exporter ** : Helps in installing and setting up statsd exporter service on ec2 instance
+  1. **ec2** : It helps us to create ec2 instance in AWS with or without additional based on the input specified in ```ec2_vars.yml```
+  2. **ec2_setup** : Helps in mounting volume if additional volume is needed and to make sure pip.conf and ec2_connect are added.
+  3. **filebeat** : Helps in configuring filebeat and also it will install filebeat if not installed earlier
+  4. **node_exporter** : Helps in installing and setting up node exporter service on ec2 instance
+  5. **statsd_exporter** : Helps in installing and setting up statsd exporter service on ec2 instance
 
 ## How to add new service and create an ec2 instances
 In order to create an instance:
 1. Create a directory inside with name of the service
-2. Create production, dev and stage subdirectories inside the directory created in (1)
+2. Create **production, dev and stage** subdirectories inside the directory created in (1)
 3. Copy ``` ec2_vars.yml, hosts, main.yml and filebeat_vars.yml``` from any existing service directory
 4. Fill the details in ```ec2_vars.yml``` as below
 ```
@@ -88,7 +88,7 @@ nginx_access_logs_path: /app/logs/nginx/access.log
 nginx_error_logs_path: /var/log/nginx/error.log
 ossec_logs_path: /app/ossec/logs/alerts/alerts.log
 ```
-6. That's it run ```ansible-playbook main.yml -i hosts``` it will create the instances with name specified in ** instances array in ```ec2_vars.yml``` **
+6. That's it run ```ansible-playbook main.yml -i hosts``` it will create the instances with name specified in **instances array in ```ec2_vars.yml```**
 
 
 
