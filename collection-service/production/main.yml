@@ -10,7 +10,7 @@
       instance_name: "{{ item }}"
     with_items: "{{ instances }}"
       
-- hosts: plan-core-hosts
+- hosts: collection-prod
   vars_files:
       - ec2_vars.yml
       - filebeat_vars.yml
