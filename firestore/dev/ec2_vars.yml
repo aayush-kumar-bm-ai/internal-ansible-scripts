@@ -1,0 +1,24 @@
+---
+instances: 
+  - d-firestore-app-server-01
+  - d-firestore-app-server-02
+
+instance_group_name: firestore-dev
+instance_key_name: backend-16-08-19
+ami_id: ami-0d6338e316cc0dce2
+instance_type: c5.2xlarge
+instance_region: us-west-2
+vpc_subnet_id: subnet-03e86548fbbfcbf2a
+security_group_ids: ["sg-0d2c34bb1cc93d18e"]
+root_volume_type: gp2
+root_volume_size: 30
+number_of_instances: 1
+is_public_ip_needed: false
+additional_volume_needed: false
+is_mounting_volume_needed: false
+additional_volume_size: 128
+additional_volume_type: gp2
+additional_volume_device_name: /dev/sdd
+nginx_needed: true
+python_version: 3.6
+
