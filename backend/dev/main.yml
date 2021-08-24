@@ -9,6 +9,10 @@
     vars:
       instance_name: "{{ item }}"
     with_items: "{{ instances }}"
+    
+  - name: Pause for 3 minutes to create instance
+    pause:
+      minutes: 3
       
 - hosts: backend-dev
   vars_files:

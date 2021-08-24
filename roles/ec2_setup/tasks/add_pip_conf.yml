@@ -10,3 +10,4 @@
     content: |
       [global]
       extra-index-url=https://bright:TheFutureBank2030@pypi.brightmoney.co/simple
+                      https://bright:TheFutureBank2030@pypi.brightmoney.co/snapshots/simple

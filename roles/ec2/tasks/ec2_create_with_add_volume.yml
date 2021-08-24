@@ -44,7 +44,7 @@
     ansible_connection: ssh
     ansible_python_interpreter: /usr/bin/python3.6
     ansible_user: ubuntu
-    groups: plan-core-hosts
+    groups: "{{ instance_group_name }}"
   loop: "{{ ec2.instances }}"
 
 - name: Add existing instance to host group
@@ -52,7 +52,7 @@
     hostname: '{{ item.private_ip_address }}'
     ansible_connection: ssh
     ansible_user: ubuntu
-    ansible_python_interpreter: /usr/bin/python3.6
-    groups: plan-core-hosts
+    ansible_python_interpreter: /usr/bin/python3
+    groups: "{{instance_group_name}}"
   loop: "{{ ec2_exits.instances }}"
   when: "{{ ec2.instances | length }} == 0 and {{ ec2_exits | length }} > 0"

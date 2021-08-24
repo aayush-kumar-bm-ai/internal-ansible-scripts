@@ -9,13 +9,16 @@
     vars:
       instance_name: "{{ item }}"
     with_items: "{{ instances }}"
+
+  # - name: Pause for 3 minutes to create instance
+  #   pause:
+  #     minutes: 3
       
-- hosts: backend-prod
+- hosts: "{{instance_group_name}}"
   vars_files:
       - ec2_vars.yml
       - filebeat_vars.yml
   become: yes
-
   tasks:
   - name: Set up an instances
     include_role:
@@ -28,11 +31,3 @@
   - name: Configure filebeat
     include_role:
       name: "../../roles/filebeat"
-
-  - name: "Remove python3.8"
-    apt:
-      name: python3.8
-      state: absent
-    when: python_version == '3.6'
-
-  
