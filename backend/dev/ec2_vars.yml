@@ -3,6 +3,7 @@ instances:
   - d-backend-server-01
   - d-backend-server-02
   - d-backend-server-03
+  - d-backend-server-04
 
 instance_group_name: backend-dev
 instance_key_name: backend-16-08-19

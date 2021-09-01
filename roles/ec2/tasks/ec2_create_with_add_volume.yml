@@ -35,7 +35,7 @@
     filters:
       "tag:Name": "{{ instance_name }}"
       instance-state-name: [ "running"]
-  register: ec2_exits
+  register: ec2_exists
   when: "{{ ec2.instances | length }} == 0"
 
 - name: Add new instance to host group
@@ -44,7 +44,7 @@
     ansible_connection: ssh
     ansible_python_interpreter: /usr/bin/python3.6
     ansible_user: ubuntu
-    groups: "{{ instance_group_name }}"
+    groups: "{{instance_group_name}}"
   loop: "{{ ec2.instances }}"
 
 - name: Add existing instance to host group
@@ -54,5 +54,5 @@
     ansible_user: ubuntu
     ansible_python_interpreter: /usr/bin/python3
     groups: "{{instance_group_name}}"
-  loop: "{{ ec2_exits.instances }}"
-  when: "{{ ec2.instances | length }} == 0 and {{ ec2_exits | length }} > 0"
+  loop: "{{ ec2_exists.instances }}"
+  when: "{{ ec2.instances | length }} == 0 and {{ ec2_exists | length }} > 0"
