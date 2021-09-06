@@ -1,7 +1,0 @@
----
-
-- name: Install OSSEC HIDS
-  include_tasks: ossec.yml
-
-- name: Configure slack
-  include_tasks: ossec-slack.yml

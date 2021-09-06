@@ -1,5 +1,0 @@
----
-# Default variables for this role
-
-# OSSEC installation questions (with email notifications)
-ossec_dir: /var/ossec
