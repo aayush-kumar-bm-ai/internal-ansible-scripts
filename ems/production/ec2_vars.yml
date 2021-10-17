@@ -1,18 +1,27 @@
 ---
 instances: 
-  - p-narada-app-server-01
-  - p-narada-worker-01
-  - p-narada-facebook-app-01
-  - p-narada-facebook-worker-01
-  - p-narada-mixpanel-app-01
-  - p-narada-mixpanel-worker-01
-  - p-narada-clevertap-app-01
-  - p-narada-clevertap-worker-01
+  # - p-narada-app-server-01
+  # - p-narada-worker-01
+  # - p-narada-facebook-app-01
+  # - p-narada-facebook-worker-01
+  - p-narada-facebook-worker-02
+  # - p-narada-mixpanel-app-01
+  # - p-narada-mixpanel-app-02
+  # - p-narada-mixpanel-worker-01
+  - p-narada-mixpanel-worker-02
+  # - p-narada-clevertap-app-01
+  # - p-narada-clevertap-app-02
+  # - p-narada-clevertap-worker-01
+  - p-narada-clevertap-worker-02
+  # - p-narada-app-server-02
+  # - p-narada-app-server-03
+  # - p-narada-app-server-04
+  
 
 instance_group_name: ems-prod
 instance_key_name: backend-16-08-19
 ami_id: ami-0d6338e316cc0dce2
-instance_type: t3.medium
+instance_type: c5a.xlarge
 instance_region: us-west-2
 vpc_subnet_id: subnet-05d0a8453b63687a4
 security_group_ids: ["sg-0abbb451f94d3f8cd"]
