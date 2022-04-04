@@ -5,15 +5,12 @@
     instance_type: "{{ instance_type }}"
     image: 
       id: "{{ ami_id }}"
-    wait: yes                               # default wait_timeout: 600
+    wait: True                               # default wait_timeout: 600
     network:
       assign_public_ip: "{{ is_public_ip_needed }}"
     vpc_subnet_id: "{{ vpc_subnet_id }}"    # aliases: subnet_id
     security_groups: "{{ security_group_ids }}"      # Can be groups under network
-    # Count has been updated to `filters` - default filters: https://docs.ansible.com/ansible/latest/collections/amazon/aws/amazon.aws.ec2_instance_module.html#parameter-filters 
-    # exact_count: "{{ number_of_instances|int }}"
-    # count_tag:
-    #   Name: "{{ instance_name }}"
+    # `Count` has been updated to `filters` - default filters: https://docs.ansible.com/ansible/latest/collections/amazon/aws/amazon.aws.ec2_instance_module.html#parameter-filters 
     tags:
       Name: "{{ instance_name }}"
     region: "{{ instance_region }}"
@@ -60,6 +57,6 @@
     - ec2.instances | length == 0 
     - ec2_exists | length > 0
 
-- name: Display dynamic inventory of instances
-  ansible.builtin.debug:
-    var: hostvars[instance_group_name]
+# - name: Display dynamic inventory of instances
+#   ansible.builtin.debug:
+#     var: hostvars[instance_group_name]
