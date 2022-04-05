@@ -67,3 +67,4 @@
   when: 
     - ec2.instances | length == 0 
     - ec2_exists | length > 0
+    
