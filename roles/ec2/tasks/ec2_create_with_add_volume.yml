@@ -11,8 +11,7 @@
     vpc_subnet_id: "{{ vpc_subnet_id }}"          # aliases: subnet_id
     security_groups: "{{ security_group_ids }}"   # Can be groups under network
     # `Count` has been updated to `filters` - default filters: https://docs.ansible.com/ansible/latest/collections/amazon/aws/ec2_instance_module.html#parameter-filters 
-    tags:
-      Name: "{{ instance_name }}"
+    tags: "{{ tags }}"
     region: "{{ instance_region }}"
     volumes:
       - device_name: /dev/sda1
