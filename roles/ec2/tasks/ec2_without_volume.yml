@@ -1,48 +1,62 @@
 ---
 - name: create ec2 instance
-  ec2:
+  amazon.aws.ec2_instance:
     key_name: "{{ instance_key_name }}"
     instance_type: "{{ instance_type }}"
-    image: "{{ ami_id }}"
-    wait: yes
-    vpc_subnet_id: "{{ vpc_subnet_id }}"
-    assign_public_ip: "{{ is_public_ip_needed }}"
-    group_id: "{{ security_group_ids }}"
-    exact_count: "{{ number_of_instances|int }}"
-    count_tag:
-      Name: "{{ instance_name }}"
-    instance_tags:
+    image: 
+      id: "{{ ami_id }}"
+    wait: True                               # default wait_timeout: 600
+    network:
+      assign_public_ip: "{{ is_public_ip_needed }}"
+    vpc_subnet_id: "{{ vpc_subnet_id }}"    # aliases: subnet_id
+    security_groups: "{{ security_group_ids }}"      # Can be groups under network
+    # `Count` has been updated to `filters` - default filters: https://docs.ansible.com/ansible/latest/collections/amazon/aws/amazon.aws.ec2_instance_module.html#parameter-filters 
+    tags:
       Name: "{{ instance_name }}"
     region: "{{ instance_region }}"
     volumes:
       - device_name: /dev/sda1
-        volume_type: "{{ root_volume_type }}"
-        volume_size: "{{ root_volume_size|int }}"
+        ebs:
+          volume_type: "{{ root_volume_type }}"
+          volume_size: "{{ root_volume_size|int }}"
   register: ec2
 
+# - debug:
+#       var: ec2.instances
+
 - name: Gather information about instance with a tag key Name and value
-  ec2_instance_info:
+  amazon.aws.ec2_instance_info:
     filters:
       "tag:Name": "{{ instance_name }}"
       instance-state-name: [ "running"]
-  register: ec2_exits
-  when: "{{ ec2.instances | length }} == 0"
+  register: ec2_exists
+  when: ec2.instances | length == 0
 
 - name: Add new instance to host group
-  add_host:
-    hostname: '{{ item.private_ip }}'
+  ansible.builtin.add_host:
+    hostname: '{{ new_instances.private_ip_address }}'
     ansible_connection: ssh
     ansible_python_interpreter: /usr/bin/python3.6
     ansible_user: ubuntu
     groups: "{{ instance_group_name }}"
   loop: "{{ ec2.instances }}"
+  loop_control:
+    loop_var: new_instances
 
 - name: Add existing instance to host group
-  add_host:
-    hostname: '{{ item.private_ip_address }}'
+  ansible.builtin.add_host:
+    hostname: '{{ existing_instances.private_ip_address }}'
     ansible_connection: ssh
     ansible_user: ubuntu
     ansible_python_interpreter: /usr/bin/python3.6
     groups: "{{ instance_group_name }}"
-  loop: "{{ ec2_exits.instances }}"
-  when: "{{ ec2.instances | length }} == 0 and {{ ec2_exits | length }} > 0"
+  loop: "{{ ec2_exists.instances }}"
+  loop_control:
+    loop_var: existing_instances
+  when: 
+    - ec2.instances | length == 0 
+    - ec2_exists | length > 0
+
+# - name: Display dynamic inventory of instances
+#   ansible.builtin.debug:
+#     var: hostvars[instance_group_name]

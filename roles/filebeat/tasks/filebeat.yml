@@ -11,9 +11,8 @@
   register: filebeat_config
 
 - name: Take a backup of old config file
-  become: yes
   command: mv /etc/filebeat/filebeat.yml /etc/filebeat/filebeat_bkp.yml
-  ignore_errors: yes
+  ignore_errors: True
   when: filebeat_config.stat.exists
 
 - name: Check previous installation
@@ -22,21 +21,18 @@
   register: filebeat_deb
 
 - name: Take a backup of old config file
-  become: yes
   command: "rm /tmp/filebeat.deb"
-  ignore_errors: yes
+  ignore_errors: True
   when: filebeat_deb.stat.exists
 
 - name: Remove older versions if exist
-  become: yes
   command: "dpkg -r filebeat"
-  ignore_errors: yes
+  ignore_errors: True
   when: filebeat.stat.exists
 
 - name: Remove older versions files if exist
-  become: yes
   command: "dpkg --purge filebeat"
-  ignore_errors: yes
+  ignore_errors: True
   when: filebeat.stat.exists
 
 - name: Download file beat
@@ -45,7 +41,6 @@
     dest: "{{ filebeat_download_path }}"
 
 - name: Install filebeat
-  become: yes
   shell: dpkg -i "{{ filebeat_download_path }}"
   async: 15
   poll: 5
