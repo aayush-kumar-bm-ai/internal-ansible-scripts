@@ -4,6 +4,9 @@ instances:
   - d-appgw-server-03
 
 instance_group_name: appgw-dev
+tags:
+  "Env": "Dev"
+  "Component": "App"
 instance_key_name: backend-16-08-19
 ami_id: ami-0d6338e316cc0dce2
 instance_type: c4.xlarge

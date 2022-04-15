@@ -1,11 +1,10 @@
 ---
 instances: 
-  - test-wms-delete-21
+  - d-dashboard-app-01
 tags:
   "Component": "App"
   "Team": "Platforms"
   "Env": "Dev"
-  "Del": "True"
 instance_group_name: WMSDev
 instance_key_name: backend-16-08-19
 ami_id: ami-0a6ae4e04e3c7ddaf

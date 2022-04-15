@@ -3,6 +3,9 @@ instances:
   - s-allocation-service-01
 
 instance_group_name: allocation-stage
+tags:
+  "Env": "Stage"
+  "Component": "App"
 instance_key_name: backend-16-08-19
 ami_id: ami-0d6338e316cc0dce2
 instance_type: t3.medium

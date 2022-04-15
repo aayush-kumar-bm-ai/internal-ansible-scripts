@@ -4,6 +4,9 @@ instances:
   - d-firestore-app-server-02
 
 instance_group_name: firestore-dev
+tags:
+  "Env": "Dev"
+  "Component": "App"
 instance_key_name: backend-16-08-19
 ami_id: ami-0d6338e316cc0dce2
 instance_type: c5.2xlarge

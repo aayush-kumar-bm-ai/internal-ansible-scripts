@@ -8,6 +8,9 @@ instances:
   #- p-backend-celery-server-02 removed as it was malware attack suspect
   - p-backend-celery-server-03
 instance_group_name: backend-prod
+tags:
+  "Env": "Production"
+  "Component": "App"
 instance_key_name: backend-16-08-19
 ami_id: ami-0d6338e316cc0dce2
 instance_type: c5a.xlarge
