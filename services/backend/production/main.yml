@@ -5,7 +5,7 @@
   tasks:
   - name: Create an instance
     include_role:
-      name: "../../roles/ec2"
+      name: "../../../roles/ec2"
     vars:
       instance_name: "{{ item }}"
     with_items: "{{ instances }}"
@@ -19,15 +19,15 @@
   tasks:
   - name: Set up an instances
     include_role:
-      name: "../../roles/ec2_setup"
+      name: "../../../roles/ec2_setup"
 
   - name: Install Ossec
     include_role:
-      name: "../../roles/ossec"
+      name: "../../../roles/ossec"
 
   - name: Configure filebeat
     include_role:
-      name: "../../roles/filebeat"
+      name: "../../../roles/filebeat"
 
   - name: "Remove python3.8"
     apt:
