@@ -1,9 +1,11 @@
 ---
 instances: 
-  - test-wms-delete-2
+  - test-wms-delete-21
 tags:
-  - Component: App
-  - team: platforms
+  "Component": "App"
+  "Team": "Platforms"
+  "Env": "Dev"
+  "Del": "True"
 instance_group_name: WMSDev
 instance_key_name: backend-16-08-19
 ami_id: ami-0a6ae4e04e3c7ddaf
@@ -16,8 +18,8 @@ root_volume_type: gp2
 root_volume_size: 20
 number_of_instances: 1
 is_public_ip_needed: False
-additional_volume_needed: True
-is_mounting_volume_needed: True
+additional_volume_needed: False
+is_mounting_volume_needed: False
 additional_volume_size: 64
 additional_volume_type: gp2
 additional_volume_device_name: /dev/sdd
