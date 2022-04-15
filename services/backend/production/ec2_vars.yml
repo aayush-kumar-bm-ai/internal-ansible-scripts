@@ -23,7 +23,7 @@ number_of_instances: 1
 is_public_ip_needed: false
 additional_volume_needed: true
 is_mounting_volume_needed: true
-additional_volume_size: 128
+additional_volume_size: 64
 additional_volume_type: gp2
 additional_volume_device_name: /dev/sdd
 nginx_needed: true

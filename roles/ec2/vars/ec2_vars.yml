@@ -8,6 +8,6 @@ vpc_subnet_id: subnet-05d0a8453b63687a4
 security_group_ids: ["sg-0abbb451f94d3f8cd"]
 root_volume_type: gp2
 root_volume_size: 20
-additional_volume_size: 128
+additional_volume_size: 64
 additional_volume_type: gp2
 additional_volume_device_name: /dev/sdd
