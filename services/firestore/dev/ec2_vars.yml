@@ -12,7 +12,8 @@ ami_id: ami-0d6338e316cc0dce2
 instance_type: c5.2xlarge
 instance_region: us-west-2
 vpc_subnet_id: subnet-03e86548fbbfcbf2a
-security_group_ids: ["sg-0d2c34bb1cc93d18e"]
+security_group_ids: 
+  - sg-0d2c34bb1cc93d18e
 root_volume_type: gp2
 root_volume_size: 30
 number_of_instances: 1
