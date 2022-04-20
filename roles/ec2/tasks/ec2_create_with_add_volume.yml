@@ -5,11 +5,11 @@
     instance_type: "{{ instance_type }}"
     image: 
       id: "{{ ami_id }}"
-    wait: True                                     # default wait_timeout: 600
+    wait: True                                     
     network:
       assign_public_ip: "{{ is_public_ip_needed }}"
-    vpc_subnet_id: "{{ vpc_subnet_id }}"          # aliases: subnet_id
-    security_groups: "{{ security_group_ids }}"   # Can be groups under network
+    vpc_subnet_id: "{{ vpc_subnet_id }}"         
+    security_groups: "{{ security_group_ids }}"  
     # `Count` has been updated to `filters` - default filters: https://docs.ansible.com/ansible/latest/collections/amazon/aws/ec2_instance_module.html#parameter-filters 
     tags: "{{ tags }}"
     region: "{{ instance_region }}"
@@ -19,9 +19,6 @@
           volume_type: "{{ root_volume_type }}"
           volume_size: "{{ root_volume_size|int }}"
   register: ec2
-
-# - debug:
-#     var: ec2.instances
 
 - name: Attach Volume
   amazon.aws.ec2_vol:
@@ -46,7 +43,6 @@
   ansible.builtin.add_host:
     hostname: '{{ new_instances.private_ip_address }}'
     ansible_connection: ssh
-    ansible_python_interpreter: /usr/bin/python3.6
     ansible_user: ubuntu
     groups: "{{instance_group_name}}"
   loop: "{{ ec2.instances }}"
