@@ -10,7 +10,11 @@
       assign_public_ip: "{{ is_public_ip_needed }}"
     vpc_subnet_id: "{{ vpc_subnet_id }}"         
     security_groups: "{{ security_group_ids }}"  
-    # `Count` has been updated to `filters` - default filters: https://docs.ansible.com/ansible/latest/collections/amazon/aws/ec2_instance_module.html#parameter-filters 
+    filters:
+      "tag:Name": "{{ instance_name }}"
+      image-id: "{{ ami_id }}" 
+      instance-state-name: running
+      network-interface.subnet-id: "{{ vpc_subnet_id }}" 
     tags: "{{ tags }}"
     region: "{{ instance_region }}"
     volumes:
@@ -36,30 +40,14 @@
     filters:
       "tag:Name": "{{ instance_name }}"
       instance-state-name: [ "running"]
-  register: ec2_exists
-  when: ec2.instances | length == 0
+  register: ec2_object
 
-- name: Add new instance to host group
+- name: Add the instance to host group
   ansible.builtin.add_host:
-    hostname: '{{ new_instances.private_ip_address }}'
+    hostname: '{{ curr_instance.private_ip_address }}'
     ansible_connection: ssh
     ansible_user: ubuntu
     groups: "{{instance_group_name}}"
-  loop: "{{ ec2.instances }}"
+  loop: "{{ ec2_object.instances }}"
   loop_control:
-    loop_var: new_instances
-
-- name: Add existing instance to host group
-  ansible.builtin.add_host:
-    hostname: '{{ existing_instances.private_ip_address }}'
-    ansible_connection: ssh
-    ansible_user: ubuntu
-    ansible_python_interpreter: /usr/bin/python3
-    groups: "{{instance_group_name}}"
-  loop: "{{ ec2_exists.instances }}"
-  loop_control:
-    loop_var: existing_instances
-  when: 
-    - ec2.instances | length == 0 
-    - ec2_exists | length > 0
-    
+    loop_var: curr_instance

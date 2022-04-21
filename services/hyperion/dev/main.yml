@@ -1,12 +1,24 @@
-
+---
 - hosts: localhost
   vars_files:
+      - base_lts.yml
       - ec2_vars.yml
   tasks:
+  - name: Gather information about Ubuntu 18.04 AMIs
+    amazon.aws.ec2_ami_info:
+      owners: 294639299176 
+      filters:
+        name: "base-ubuntu18-py36*"
+    register: ec2_ami
+
+  # - debug:
+  #     var: ec2_ami.images[0].image_id
+
   - name: Create an instance
     include_role:
       name: "../../../roles/ec2"
     vars:
+      ami_id: ec2_ami.images[0].image_id
       instance_name: "{{ item }}"
     with_items: "{{ instances }}"
 
