@@ -3,6 +3,7 @@
   amazon.aws.ec2_instance:
     key_name: "{{ instance_key_name }}"
     instance_type: "{{ instance_type }}"
+    instance_role: "{{instance_role}}"
     image: 
       id: "{{ ami_id }}"
     wait: True                                     
@@ -23,6 +24,10 @@
           volume_type: "{{ root_volume_type }}"
           volume_size: "{{ root_volume_size|int }}"
   register: ec2
+
+# - name: Waiting for instance to start before attaching volume
+#   pause:
+#     minutes: "{{ wait_time_before_attaching_volume }}"
 
 - name: Attach Volume
   amazon.aws.ec2_vol:

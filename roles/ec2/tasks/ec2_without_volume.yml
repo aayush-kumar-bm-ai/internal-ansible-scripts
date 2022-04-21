@@ -3,6 +3,7 @@
   amazon.aws.ec2_instance:
     key_name: "{{ instance_key_name }}"
     instance_type: "{{ instance_type }}"
+    instance_role: "{{instance_role}}"
     image: 
       id: "{{ ami_id }}"
     wait: True                               
@@ -40,3 +41,6 @@
   loop: "{{ ec2_object.instances }}"
   loop_control:
     loop_var: curr_instance
+
+- debug:
+   var: ec2_object.instances
