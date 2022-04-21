@@ -1,6 +1,5 @@
 ---
 instances: 
-  - d-dashboard-app-01
 tags:
   "Component": "App"
   "Team": "Platforms"
@@ -15,7 +14,6 @@ security_group_ids:
   - sg-0d2c34bb1cc93d18e
 root_volume_type: gp2
 root_volume_size: 20
-number_of_instances: 1
 is_public_ip_needed: False
 additional_volume_needed: False
 is_mounting_volume_needed: False

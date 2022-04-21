@@ -1,8 +1,5 @@
 ---
 instances: 
-  - d-backend-server-01
-  - d-backend-server-02
-  - d-backend-server-03
   - d-backend-server-04
 
 instance_group_name: backend-dev
@@ -10,7 +7,7 @@ tags:
   "Env": "Dev"
   "Component": "App"
 instance_key_name: backend-16-08-19
-ami_id: ami-0d6338e316cc0dce2
+ami_id: ami-0e0dfde30ee505cc5
 instance_type: c4.xlarge
 instance_region: us-west-2
 vpc_subnet_id: subnet-03e86548fbbfcbf2a
@@ -18,7 +15,6 @@ security_group_ids:
   - sg-0d2c34bb1cc93d18e
 root_volume_type: gp2
 root_volume_size: 64
-number_of_instances: 1
 is_public_ip_needed: false
 additional_volume_needed: false
 is_mounting_volume_needed: false
