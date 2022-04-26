@@ -1,2 +1,3 @@
 ---
 nginx_needed: false
+filebeat_needed: false
