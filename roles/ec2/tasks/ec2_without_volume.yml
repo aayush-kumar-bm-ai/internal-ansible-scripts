@@ -16,9 +16,10 @@
       image-id: "{{ ami_id }}" 
       instance-state-name: running
       network-interface.subnet-id: "{{ vpc_subnet_id }}" 
-    tags:
-      Name: "{{ instance_name }}"
-    region: "{{ instance_region }}"
+    # tags:
+    #   Name: "{{ instance_name }}"
+    # region: "{{ instance_region }}"
+    tags: "{{ tags | combine({'Name': instance_name}) }}"
     volumes:
       - device_name: /dev/sda1
         ebs:
@@ -42,5 +43,5 @@
   loop_control:
     loop_var: curr_instance
 
-- debug:
-   var: ec2_object.instances
+# - debug:
+#    var: ec2_object.instances
