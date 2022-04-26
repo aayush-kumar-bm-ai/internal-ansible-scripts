@@ -1,24 +1,16 @@
 ---
 instances: 
+
+instance_type: t3.medium
+instance_group_name: dashboard-dev
 tags:
-  "Component": "App"
   "Team": "Platforms"
   "Env": "Dev"
-instance_group_name: WMSDev
-instance_key_name: backend-16-08-19
-ami_id: ami-0a6ae4e04e3c7ddaf
-instance_type: t3.medium
-instance_region: us-west-2
-vpc_subnet_id: subnet-00e9eefd3eca05835
-security_group_ids: 
-  - sg-0d2c34bb1cc93d18e
-root_volume_type: gp2
+
+ami_name: "wms-ubuntu18-py36*"
 root_volume_size: 20
+additional_volume_size: 64
 is_public_ip_needed: False
 additional_volume_needed: False
 is_mounting_volume_needed: False
-additional_volume_size: 64
-additional_volume_type: gp2
-additional_volume_device_name: /dev/sdd
 nginx_needed: true
-python_version: 3.6
