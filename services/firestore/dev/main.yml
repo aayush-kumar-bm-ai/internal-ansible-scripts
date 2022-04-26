@@ -1,6 +1,7 @@
 
 - hosts: localhost
   vars_files:
+      - base_lts.yml
       - ec2_vars.yml
   tasks:
   - name: Gather information about {{ ami_name }} AMIs
@@ -22,7 +23,7 @@
   vars_files:
       - ec2_vars.yml
       - filebeat_vars.yml
-  become: yes
+  become: true
   tasks:
   - name: Set up an instances
     include_role:

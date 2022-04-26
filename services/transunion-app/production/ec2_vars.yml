@@ -21,4 +21,3 @@ additional_volume_type: gp2
 additional_volume_device_name: /dev/sdd
 nginx_needed: true
 python_version: 3.8
-

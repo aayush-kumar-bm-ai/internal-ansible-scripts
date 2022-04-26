@@ -1,3 +1,5 @@
+---
+filebeat_needed: false
 filebeat_download_url: https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.12.0-amd64.deb
 filebeat_download_path: /tmp/filebeat.deb
 app_name: assetmgr
