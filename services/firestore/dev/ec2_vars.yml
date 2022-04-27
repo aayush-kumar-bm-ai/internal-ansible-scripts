@@ -1,0 +1,16 @@
+---
+instances: 
+
+instance_type: c5.2xlarge
+instance_group_name: firestore-dev
+tags:
+  "Env": "Dev"
+  "Component": "App"
+
+ami_name: "base-ubuntu18-py36*"
+root_volume_size: 30
+additional_volume_size: 64
+is_public_ip_needed: false
+additional_volume_needed: false
+is_mounting_volume_needed: false
+nginx_needed: true

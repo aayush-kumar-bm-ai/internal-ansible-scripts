@@ -1,0 +1,29 @@
+---
+instances: 
+  - p-credit-beat-server-01
+
+instance_group_name: credit-prod
+tags:
+  "Env": "Production"
+  "Component": "App"
+instance_key_name: backend-16-08-19
+ami_id: ami-0e0dfde30ee505cc5
+instance_type: t3.medium
+instance_region: us-west-2
+vpc_subnet_id: subnet-06cb244de96f111a0
+security_group_ids: 
+  - sg-01d0540de9584f496
+  - sg-06ce8cbb1e6f055fb
+  - sg-071ee056713735e46
+  - sg-02ee056c4bb86467b
+root_volume_type: gp2
+root_volume_size: 20
+is_public_ip_needed: false
+additional_volume_needed: true
+is_mounting_volume_needed: true
+additional_volume_size: 64
+additional_volume_type: gp2
+additional_volume_device_name: /dev/sdd
+nginx_needed: true
+python_version: 3.8
+

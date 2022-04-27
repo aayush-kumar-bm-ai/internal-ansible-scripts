@@ -1,0 +1,19 @@
+---
+instances: 
+  - d-hyperion-app-01
+
+instance_group_name: hyperion-dev
+tags:
+  "Service": "Hyperion"
+  "Env": "Dev"
+  "Component": "App"
+
+root_volume_size: 30
+is_public_ip_needed: false
+additional_volume_needed: true
+is_mounting_volume_needed: true
+additional_volume_size: 64
+additional_volume_type: gp2
+additional_volume_device_name: /dev/sdd
+nginx_needed: true
+python_version: 3.8

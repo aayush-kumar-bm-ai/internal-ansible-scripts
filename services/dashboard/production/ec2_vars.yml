@@ -1,0 +1,16 @@
+---
+instances: 
+
+instance_type: t3.medium
+instance_group_name: dashboard-prod
+tags:
+  "Team": "Platforms"
+  "Env": "Dev"
+
+ami_name: "wms-ubuntu18-py36*"
+root_volume_size: 20
+additional_volume_size: 128
+is_public_ip_needed: False
+additional_volume_needed: False
+is_mounting_volume_needed: False
+nginx_needed: true

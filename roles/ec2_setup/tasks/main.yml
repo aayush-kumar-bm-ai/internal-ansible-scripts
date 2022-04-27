@@ -13,3 +13,25 @@
 - name: Install Nginx
   include_tasks: nginx.yml
   when: nginx_needed
+
+- name: Install nodexporter
+  include_role: 
+    name: "../../../roles/node_exporter"
+
+- name: Install statsd
+  include_role: 
+    name: "../../../roles/statsd_exporter"
+
+- name: Install filebeat
+  include_role: 
+    name: "../../../roles/filebeat"
+  when: filebeat_needed
+
+- name: Install Virtualenv & Virtualenvwrapper
+  become_user: bright_tech
+  become: true
+  pip:
+    name: 
+      - virtualenv
+      - virtualenvwrapper
+

@@ -1,0 +1,45 @@
+---
+- hosts: localhost
+  vars_files:
+      - base_lts.yml
+      - ec2_vars.yml
+  tasks:
+  - name: Gather information about Ubuntu 18.04 AMIs
+    amazon.aws.ec2_ami_info:
+      owners: 294639299176 
+      filters:
+        name: "base-ubuntu18-py36*"
+    register: ec2_ami
+
+  # - debug:
+  #     var: ec2_ami.images[0].image_id
+
+  - name: Create an instance
+    include_role:
+      name: "../../../roles/ec2"
+    vars:
+      ami_id: ec2_ami.images[0].image_id
+      instance_name: "{{ item }}"
+    with_items: "{{ instances }}"
+
+  - name: Pause for 3 minutes to create instance
+    pause:
+      minutes: 3
+      
+- hosts: hyperion-dev
+  vars_files:
+      - ec2_vars.yml
+      - filebeat_vars.yml
+  become: yes
+  tasks:
+  - name: Set up an instances
+    include_role:
+      name: "../../../roles/ec2_setup"
+
+  # - name: Install Ossec
+  #   include_role:
+  #     name: "../../../roles/ossec"
+
+  - name: Configure filebeat
+    include_role:
+      name: "../../../roles/filebeat"

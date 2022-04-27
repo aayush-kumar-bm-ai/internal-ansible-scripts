@@ -22,7 +22,7 @@
     validate: 'visudo -cf %s'
 
 - name: Create app directory
-  become: yes
+  become: true
   file: 
     path: /app
     state: directory

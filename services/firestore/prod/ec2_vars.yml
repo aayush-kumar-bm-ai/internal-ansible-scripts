@@ -1,0 +1,18 @@
+---
+instances: 
+  - j-firestore-del-01
+  - j-firestore-del-02
+
+instance_type: t3a.2xlarge
+instance_group_name: firestore-prod
+tags:
+  "Env": "Prod"
+  "Component": "App"
+
+ami_name: "base-ubuntu18-py36*"
+root_volume_size: 30
+additional_volume_size: 128
+is_public_ip_needed: false
+additional_volume_needed: true 
+is_mounting_volume_needed: true 
+nginx_needed: true

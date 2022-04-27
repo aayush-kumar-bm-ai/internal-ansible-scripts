@@ -1,0 +1,42 @@
+---
+instances: 
+  # - p-narada-app-server-01
+  # - p-narada-worker-01
+  # - p-narada-facebook-app-01
+  # - p-narada-facebook-worker-01
+  - p-narada-facebook-worker-02
+  # - p-narada-mixpanel-app-01
+  # - p-narada-mixpanel-app-02
+  # - p-narada-mixpanel-worker-01
+  - p-narada-mixpanel-worker-02
+  # - p-narada-clevertap-app-01
+  # - p-narada-clevertap-app-02
+  # - p-narada-clevertap-worker-01
+  - p-narada-clevertap-worker-02
+  # - p-narada-app-server-02
+  # - p-narada-app-server-03
+  # - p-narada-app-server-04
+  
+
+instance_group_name: ems-prod
+tags:
+  "Env": "Production"
+  "Component": "App"
+instance_key_name: backend-16-08-19
+ami_id: ami-0e0dfde30ee505cc5
+instance_type: c5a.xlarge
+instance_region: us-west-2
+vpc_subnet_id: subnet-05d0a8453b63687a4
+security_group_ids: 
+  - sg-0abbb451f94d3f8cd
+root_volume_type: gp2
+root_volume_size: 30
+is_public_ip_needed: false
+additional_volume_needed: true
+is_mounting_volume_needed: true
+additional_volume_size: 64
+additional_volume_type: gp2
+additional_volume_device_name: /dev/sdd
+nginx_needed: true
+python_version: 3.8
+
