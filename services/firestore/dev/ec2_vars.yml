@@ -9,7 +9,7 @@ tags:
 
 ami_name: "base-ubuntu18-py36*"
 root_volume_size: 30
-additional_volume_size: 128
+additional_volume_size: 64
 is_public_ip_needed: false
 additional_volume_needed: false
 is_mounting_volume_needed: false
