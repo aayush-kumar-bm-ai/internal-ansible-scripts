@@ -27,20 +27,22 @@
     path: /app
     state: directory
 
-- name: List volumes
-  command: lsblk
+# - name: List volumes
+#   command: lsblk
 
-- name: Get specific info volumes
-  command: sudo file -s /dev/nvme1n1
+# - name: Get specific info volumes
+#   command: sudo file -s /dev/nvme1n1
 
-- name: Get info about attached volumes
-  command: sudo lsblk -f
+# - name: Get info about attached volumes
+#   command: sudo lsblk -f
 
-- name: Convert to file system
-  command: sudo mkfs -t xfs /dev/nvme1n1
+# - name: Convert to file system
+#   command: sudo mkfs -t xfs /dev/nvme1n1
 
 - name: Mount app directory
   command: sudo mount /dev/nvme1n1 /app
+  ignore_errors: True
+  register: vol_mount_log
 
 - name: change ownership of /app
   command: chown bright_tech:users /app

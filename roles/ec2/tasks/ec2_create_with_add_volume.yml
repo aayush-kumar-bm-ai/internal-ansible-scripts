@@ -16,7 +16,7 @@
       image-id: "{{ ami_id }}" 
       instance-state-name: running
       network-interface.subnet-id: "{{ vpc_subnet_id }}" 
-    tags: "{{ tags | combine({'Name': instance_name}) }}"
+    tags: "{{ tags | combine({'Name': instance_name, 'Component': instance_component}) }}"
     region: "{{ instance_region }}"
     volumes:
       - device_name: /dev/sda1
@@ -25,9 +25,9 @@
           volume_size: "{{ root_volume_size|int }}"
   register: ec2
 
-- name: Waiting for instance to start before attaching volume
-  pause:
-    minutes: 2
+# - name: Waiting for instance to start before attaching volume
+#   pause:
+#     minutes: 2
 
 - name: Attach Volume
   amazon.aws.ec2_vol:

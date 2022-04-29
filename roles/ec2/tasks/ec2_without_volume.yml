@@ -18,8 +18,8 @@
       network-interface.subnet-id: "{{ vpc_subnet_id }}" 
     # tags:
     #   Name: "{{ instance_name }}"
-    # region: "{{ instance_region }}"
-    tags: "{{ tags | combine({'Name': instance_name}) }}"
+    region: "{{ instance_region }}"
+    tags: "{{ tags | combine({'Name': instance_name, 'Component': instance_component}) }}"
     volumes:
       - device_name: /dev/sda1
         ebs:
