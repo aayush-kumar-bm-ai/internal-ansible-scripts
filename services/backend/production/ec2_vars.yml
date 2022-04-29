@@ -19,24 +19,14 @@ instances:
     component: app
     instance_type: c5a.xlarge
   - name: "p-backend-celery-beat-01"
-    component: app
+    component: celery
     instance_type: t3.medium
   - name: "p-backend-celery-server-01"
-    component: app
+    component: celery
     instance_type: c5a.2xlarge
   - name: "p-backend-celery-server-03"
-    component: app
+    component: celery
     instance_type: c5a.2xlarge
-  - name: "p-backend-faust-worker-01"
-    component: app
-    instance_type: c5a.large
-  - name: "p-backend-memcached-01"
-    component: app
-    instance_type: t3.medium
-  - name: "p-backend-migration-01"
-    component: app
-    instance_type: t2.micro
- 
 
 instance_group_name: backend-prod
 tags:
