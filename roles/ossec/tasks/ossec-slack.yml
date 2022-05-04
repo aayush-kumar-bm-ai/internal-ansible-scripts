@@ -6,7 +6,7 @@
   register: ossec_slack
 
 - name: Take a backup of old config file
-  become: yes
+  become: true
   command: mv /app/ossec/active-response/bin/ossec-slack.sh /app/ossec/active-response/bin/ossec-slack_bkp
   when: ossec_slack.stat.exists
 
