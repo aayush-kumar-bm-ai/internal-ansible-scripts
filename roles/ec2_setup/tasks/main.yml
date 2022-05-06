@@ -22,6 +22,10 @@
   include_role: 
     name: "../../../roles/statsd_exporter"
 
+- name: Install Ossec
+  include_role: 
+    name: "../../../roles/ossec"
+
 - name: Install filebeat
   include_role: 
     name: "../../../roles/filebeat"
