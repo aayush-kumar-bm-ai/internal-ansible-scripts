@@ -1,11 +1,14 @@
 ---
 instances: 
+ - name: d-wms-app-server-01
+   component: app
+   instance_type: t3a.small
 
-instance_type: t3.medium
-instance_group_name: dashboard-dev
+instance_group_name: wmsDev 
 tags:
   "Team": "Platforms"
   "Env": "Dev"
+  "Service": "WMS"
 
 ami_name: "wms-ubuntu18-py36*"
 root_volume_size: 20
