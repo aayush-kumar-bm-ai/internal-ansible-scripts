@@ -11,16 +11,17 @@
         name: "{{ami_name}}"
     register: ec2_ami
 
-
   - name: Create an instance
     include_role:
-      name: "../../../../roles/ec2"
+      name: "../../../roles/ec2"
     vars:
-      ami_id: "{{ ec2_ami.images[-1].image_id }}"
-      instance_name: "{{ item }}"
+      ami_id: "{{ ec2_ami.images[0].image_id }}"
+      instance_name: "{{ item.name }}"
+      instance_component: "{{ item.component }}"
+      instance_type: "{{ item.instance_type }}"
     with_items: "{{ instances }}"
-      
-- hosts: dashboard-stage
+     
+- hosts: wmsProd 
   vars_files:
       - ec2_vars.yml
       - filebeat_vars.yml

@@ -1,11 +1,11 @@
 ---
 instances: 
 
-instance_type: t3.medium
-instance_group_name: dashboard-dev
+instance_group_name: wmsStage 
 tags:
   "Team": "Platforms"
   "Env": "Dev"
+  "Service": "WMS"
 
 ami_name: "wms-ubuntu18-py36*"
 root_volume_size: 20
