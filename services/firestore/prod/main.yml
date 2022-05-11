@@ -29,7 +29,7 @@
     include_role:
       name: "../../../roles/ec2_setup"
 
-  - name: Copy Ngnix Timeout Configs
+  - name: Copy Nginx Timeout Configs
     become: yes
     ansible.builtin.copy:
       src: ../nginx.conf
