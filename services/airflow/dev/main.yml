@@ -7,7 +7,10 @@
     include_role:
       name: "../../../roles/ec2"
     vars:
-      instance_name: "{{ item }}"
+      ami_id: "{{ ec2_ami.images[0].image_id }}"
+      instance_name: "{{ item.name }}"
+      instance_component: "{{ item.component }}"
+      instance_type: "{{ item.instance_type }}"
     with_items: "{{ instances }}"
       
 - hosts: plan-core-hosts
@@ -20,11 +23,3 @@
   - name: Set up an instances
     include_role:
       name: "../../../roles/ec2_setup"
-
-  - name: Install Ossec
-    include_role:
-      name: "../../../roles/ossec"
-
-  - name: Configure filebeat
-    include_role:
-      name: "../../../roles/filebeat"
