@@ -28,3 +28,12 @@
   - name: Set up an instances
     include_role:
       name: "../../../roles/ec2_setup"
+
+  - name: Copy Nginx Timeout Configs
+    become: yes
+    ansible.builtin.copy:
+      src: ../nginx.conf
+      dest: /etc/nginx/nginx.conf
+      owner: root
+      group: root
+      force: yes
