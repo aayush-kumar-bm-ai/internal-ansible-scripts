@@ -1,5 +1,6 @@
 
 - hosts: localhost
+  gather_facts: false
   vars_files:
     - base_lts.yml
     - ec2_vars.yml
@@ -16,10 +17,14 @@
       name: "../../../roles/ec2"
     vars:
       ami_id: "{{ ec2_ami.images[-1].image_id }}"
-      instance_name: "{{ item }}"
+      instance_name: "{{ item.name }}"
+      instance_component: "{{ item.component }}"
+      instance_type: "{{ item.instance_type }}"
     with_items: "{{ instances }}"
 
 - hosts: firestore-prod
+  strategy: free
+  gather_facts: false
   vars_files:
       - ec2_vars.yml
       - filebeat_vars.yml
