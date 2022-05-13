@@ -25,10 +25,6 @@
           volume_size: "{{ root_volume_size|int }}"
   register: ec2
 
-# - name: Waiting for instance to start before attaching volume
-#   pause:
-#     minutes: 2
-
 - name: Attach Volume
   amazon.aws.ec2_vol:
     instance: '{{ attach_new_volumes.instance_id }}'
