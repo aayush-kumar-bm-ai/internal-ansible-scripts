@@ -1,5 +1,4 @@
 ---
-
 - name: Create Ec2 instance
   include_tasks: ec2_create_with_add_volume.yml
   when: additional_volume_needed
@@ -7,3 +6,13 @@
 - name: Create EC2 instance without additional volume
   include_tasks: ec2_without_volume.yml
   when: not additional_volume_needed
+
+- name: "Wait for ssh to enable on {{ instance_group_name }} {{ curr_instance.private_ip_address }}"
+  wait_for: 
+    host: "{{ curr_instance.private_ip_address }}"
+    port: 22 
+    delay: 5
+    timeout: 300
+  loop: "{{ ec2.instances }}"
+  loop_control:
+    loop_var: curr_instance

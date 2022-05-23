@@ -23,6 +23,7 @@
         ebs:
           volume_type: "{{ root_volume_type }}"
           volume_size: "{{ root_volume_size|int }}"
+  register: ec2
 
 - name: Gather information about instance with a tag key Name and value
   amazon.aws.ec2_instance_info:
