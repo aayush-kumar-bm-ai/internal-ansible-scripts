@@ -1,5 +1,12 @@
 ---
-- name: Update system
-  command: "sudo apt-get update"
 - name: Install EC2 Connect
-  command: "sudo apt-get install ec2-instance-connect"
+  become: true
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name: "ec2-instance-connect"
+    state: present
+  register: ec2connect_status
+  until: ec2connect_status is success
+  delay: 6
+  retries: 10

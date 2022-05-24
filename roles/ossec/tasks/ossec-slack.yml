@@ -11,15 +11,18 @@
   when: ossec_slack.stat.exists
 
 - name: Copy the slack-config file
+  become: true
   template: 
     src: "ossec-slack.j2" 
     dest: "/app/ossec/active-response/bin/ossec-slack.sh"
     mode: a+x
 
 - name: 'Restart OSSEC'
+  become: true
   command: "/app/ossec/bin/ossec-control restart"
 
-- name: restart ossec
+- name: Ensure restart ossec
+  become: true
   service:
     name: ossec
     state: restarted
