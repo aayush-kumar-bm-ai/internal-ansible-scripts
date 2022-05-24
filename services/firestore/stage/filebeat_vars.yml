@@ -2,9 +2,9 @@ filebeat_download_url: https://artifacts.elastic.co/downloads/beats/filebeat/fil
 filebeat_download_path: /tmp/filebeat.deb
 app_name: firestore
 env: stage
-celery_logs_path: /app/logs/celery/celerystdout.log
-celery_beat_logs_path: /app/logs/celery_beat/celerystdout.log
-gunicorn_logs_path: /app/logs/gunicorn/gunicornstdout.log
+celery_logs_path: /app/logs/celery/*
+celery_beat_logs_path: /app/logs/celery_beat/*
+gunicorn_logs_path: /app/logs/gunicorn/gunicorn*.log*
 nginx_access_logs_path: /app/logs/nginx/access.log
 nginx_error_logs_path: /var/log/nginx/error.log
 ossec_logs_path: /app/ossec/logs/alerts/alerts.log
