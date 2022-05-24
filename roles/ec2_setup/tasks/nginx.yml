@@ -1,11 +1,17 @@
 ---
 
 - name: Install nginx
+  become: true
   apt:
     name: nginx
     state: present
+  register: nginx_status
+  until: nginx_status is success
+  delay: 3
+  retries: 10
     
 - name: start nginx
+  become: true
   service:
       name: nginx
       state: started
