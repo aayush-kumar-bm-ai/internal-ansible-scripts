@@ -12,9 +12,11 @@
     dest: "{{ node_extraction_dest }}"
 
 - name: Move executable to bin
+  become: true
   command: "mv {{node_extraction_dest}}/{{node_exporter_package}}/node_exporter {{usr_bin_dir}}/node_exporter"
 
 - name: Add the user 'prometheus'
+  become: true
   user:
     name: prometheus
     state: present
@@ -22,24 +24,29 @@
     shell: /bin/bash
 
 - name: Copy node exporter service file
+  become: true
   template:
     src: node_exporter_service.j2
     dest: /etc/systemd/system/node_exporter.service
 
 - name: just force systemd to reread configs
+  become: true
   systemd: daemon_reload=yes
 
 - name: Start service node_exporter
+  become: true
   systemd:
     name: node_exporter
     state: started
 
 - name: enable service node_exporter
+  become: true
   systemd:
     name: node_exporter
     enabled: yes
 
 - name: Make sure a service is running
+  become: true
   systemd:
     state: started
     name: node_exporter
