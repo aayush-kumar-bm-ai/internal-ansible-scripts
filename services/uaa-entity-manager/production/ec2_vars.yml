@@ -1,33 +1,15 @@
 ---
-ami_name: "base-ubuntu18-py36*"
+## AMI change was requested by team
+ami_name: "bright-ubuntu-18-base"
 instances: 
-  - name: "	p-uaa-entity-manager-03"
+  - name: "p-uaa-entity-manager-03"
     component: app
     instance_type: t3.large
-  # - name: "p-backend-app-server-02"
-  #   component: app
-  #   instance_type: c5a.xlarge
-  # - name: "p-backend-app-server-03"
-  #   component: app
-  #   instance_type: c5a.xlarge
-  # - name: "p-backend-app-server-04"
-  #   component: app
-  #   instance_type: c5a.xlarge
-  # - name: "p-backend-app-server-05"
-  #   component: app
-  #   instance_type: c5a.xlarge
-  # - name: "p-backend-app-server-06"
-  #   component: app
-  #   instance_type: c5a.xlarge
-  # - name: "p-backend-celery-beat-01"
-  #   component: celery
-  #   instance_type: t3.medium
-  # - name: "p-backend-celery-server-01"
-  #   component: celery
-  #   instance_type: c5a.2xlarge
-  # - name: "p-backend-celery-server-03"
-  #   component: celery
-  #   instance_type: c5a.2xlarge
+
+  - name: "p-uaa-entity-manager-04"
+    component: app
+    instance_type: t3.large
+    
 
 instance_group_name: uaa-em-prod
 tags:
