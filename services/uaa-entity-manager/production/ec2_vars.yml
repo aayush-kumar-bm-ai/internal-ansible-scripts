@@ -1,6 +1,7 @@
 ---
-## AMI change was requested by team
-ami_name: "bright-ubuntu-18-base"
+## Use static AMI id || AMI change was requested by team
+ami_id: ami-01feb03e08c307c59
+# ami_name: "bright-ubuntu-18-base"
 instances: 
   - name: "p-uaa-entity-manager-03"
     component: app
