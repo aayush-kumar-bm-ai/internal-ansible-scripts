@@ -1,0 +1,58 @@
+---
+- name: Setting Facts
+  set_fact:
+    repo_name: "{{github_repo_link | split('/') | last | split('.') | first}}"
+    local_tmp_dir: "/tmp"
+    remote_pip_reqs_dir: "/tmp/ansible_pip_download_reqs/"
+    remote_pip_dl_dir: "/opt"
+    pip_setup_script_name: "bright_setup_install_pip.sh"
+
+- name: "Force clone {{ repo_name }}:{{ branch_version }} to ansible localhost"
+  local_action:
+    module: ansible.builtin.git
+    repo: "{{ github_repo_link }}"
+    dest: "{{ local_tmp_dir }}/{{ repo_name }}"
+    version: "{{ branch_version }}"
+    depth: 1
+    clone: yes
+    update: yes
+  
+- name: Locate {{ requirements_file_patterns }} in the {{ repo_name }} repository
+  local_action: 
+    module: find
+    paths: "{{ local_tmp_dir }}/{{ repo_name }}"
+    recurse: true
+    patterns: "{{ requirements_file_patterns }}"
+    file_type: file
+    depth: "{{ max_folder_lookup_depth }}"
+  register: requirement_files
+
+- name: "Ensure {{ remote_pip_reqs_dir}} directory on {{ ansible_hostname }}"
+  ansible.builtin.file:
+    path: "{{ remote_pip_reqs_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: "Copy {{ requirements_file_patterns }} to {{ inventory_hostname }}"
+  ansible.builtin.copy:
+    src: "{{item.path}}"
+    dest: "{{ remote_pip_reqs_dir }}{{ item.path | split('/') | last }}"
+    mode: u+r
+  with_items: "{{ requirement_files.files }}"
+
+- name: Ensure pip setup
+  ansible.builtin.include_tasks: add_pip_conf.yml
+
+- name: "Copy pip installation script to {{ ansible_hostname }}"
+  ansible.builtin.copy:
+    src: "./{{ pip_setup_script_name }}"
+    dest: "{{ remote_pip_reqs_dir }}{{ pip_setup_script_name }}"
+    mode: a+x
+
+- name: "Run installation script on {{ ansible_hostname }}"
+  become_user: bright_tech
+  ansible.builtin.shell:
+    cmd: "{{ remote_pip_reqs_dir }}{{ pip_setup_script_name }} {{ remote_pip_reqs_dir }} {{ remote_pip_dl_dir }}"
+  async: 6000
+  poll: 10
+  register: pipscrout
