@@ -10,29 +10,6 @@ if [[ $# -eq 0 ]]; then
     exit 1
 fi
 
-
-if [[ -f /etc/pip.conf ]]; then
-  echo "Removing /etc/pip.conf"
-  sudo rm -f /etc/pip.conf
-fi
-
-# if ! [[ -f /etc/pip_bright_prod.conf ]]
-#   echo "Running fast pip conf setup"
-#   sudo echo "# BEGIN PACKER MANAGED BLOCK
-# [global]
-# extra-index-url=https://bright:TheFutureBank2030@pypi.brightmoney.co/snapshots/simple
-# # END PACKER MANAGED BLOCK" > /etc/pip_bright_dev.conf
-#   sudo echo "# BEGIN PACKER MANAGED BLOCK
-# [global]
-# extra-index-url=https://bright:TheFutureBank2030@pypi.brightmoney.co/simple
-# # END PACKER MANAGED BLOCK" > /etc/pip_bright_prod.conf
-#   sudo echo "# BEGIN PACKER MANAGED BLOCK
-# [global]
-# extra-index-url=https://bright:TheFutureBank2030@pypi.brightmoney.co/simple
-#                 https://bright:TheFutureBank2030@pypi.brightmoney.co/snapshots/simple
-# # END PACKER MANAGED BLOCK" > /etc/pip.conf.bak
-# fi
-
 if [[ $(ls -al1 $PIP_REQ_TXT_DIR | grep -c "prod\|global\|public") ]]; then
   echo "Bright fast pip installation requirements not found."
   if [[ -f $PIP_REQ_TXT_DIR/requirements.txt ]]; then
