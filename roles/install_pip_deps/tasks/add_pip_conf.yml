@@ -1,0 +1,36 @@
+---
+- name: Remove pip.conf
+  file:
+    path: "/etc/pip.conf"
+    state: absent
+
+- name: Touch file
+  file:
+    path: "/etc/{{ item }}"
+    state: touch
+  loop:
+    - "/etc/pip_bright_prod.conf"
+    - "/etc/pip_bright_dev.conf"
+    - "/etc/pip.conf.bak"
+
+- name: Adding Prod pip Key
+  blockinfile:
+    path: /etc/pip_bright_prod.conf
+    content: |
+      [global]
+      extra-index-url=https://bright:TheFutureBank2030@pypi.brightmoney.co/simple
+
+- name: Adding pip.conf.bak Key
+  blockinfile:
+    path: /etc/pip_bright_dev.conf
+    content: |
+      [global]
+      extra-index-url=https://bright:TheFutureBank2030@pypi.brightmoney.co/snapshots/simple
+
+- name: Adding pip.conf.bak Key
+  blockinfile:
+    path: /etc/pip.conf.bak
+    content: |
+      [global]
+      extra-index-url=https://bright:TheFutureBank2030@pypi.brightmoney.co/simple
+                      https://bright:TheFutureBank2030@pypi.brightmoney.co/snapshots/simple
