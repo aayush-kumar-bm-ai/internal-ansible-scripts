@@ -1,0 +1,25 @@
+---
+## Use static AMI id || AMI change was requested by team
+ami_id: ami-01feb03e08c307c59
+# ami_name: "bright-ubuntu-18-base"
+instances: 
+  - name: "p-uaa-entity-manager-03"
+    component: app
+    instance_type: t3.large
+
+  - name: "p-uaa-entity-manager-04"
+    component: app
+    instance_type: t3.large
+    
+
+instance_group_name: uaa-em-prod
+tags:
+  "Env": "Prod"
+  "Service": "UAA_Entity_Manager"
+
+root_volume_size: 20
+additional_volume_size: 128
+is_public_ip_needed: false
+additional_volume_needed: true 
+is_mounting_volume_needed: true 
+nginx_needed: true
