@@ -13,14 +13,14 @@
     - "/etc/pip_bright_dev.conf"
     - "/etc/pip.conf.bak"
 
-- name: Adding Prod pip Key
+- name: Adding Prod PyPi pip conf
   blockinfile:
     path: /etc/pip_bright_prod.conf
     content: |
       [global]
       extra-index-url=https://bright:TheFutureBank2030@pypi.brightmoney.co/simple
 
-- name: Adding pip.conf.bak Key
+- name: Adding Dev PyPi pip conf
   blockinfile:
     path: /etc/pip_bright_dev.conf
     content: |
