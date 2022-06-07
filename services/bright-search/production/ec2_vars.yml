@@ -1,0 +1,21 @@
+---
+ami_name: "base-ubuntu18-py36*"
+instances:
+  - name: "p-brightsearch-app-server-01"
+    component: app
+    instance_type: t3.medium
+  - name: "p-brightsearch-app-server-02"
+    component: app
+    instance_type: t3.medium
+
+instance_group_name: bright_search_prod
+tags:
+  "Env": "Prod"
+  "Service": "Bright Search"
+
+root_volume_size: 20
+additional_volume_size: 64
+is_public_ip_needed: false
+additional_volume_needed: true
+is_mounting_volume_needed: true
+nginx_needed: true

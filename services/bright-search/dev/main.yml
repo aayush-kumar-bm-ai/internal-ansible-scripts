@@ -1,0 +1,24 @@
+- hosts: localhost
+  vars_files:
+    - ec2_vars.yml
+  tasks:
+    - name: Create an instance
+      include_role:
+        name: "../../../roles/ec2"
+      vars:
+        ami_id: "{{ ec2_ami.images[-1].image_id }}"
+        instance_name: "{{ item.name }}"
+        instance_component: "{{ item.component }}"
+        instance_type: "{{ item.instance_type }}"
+      with_items: "{{ instances }}"
+
+- hosts: bright_search_dev
+  vars_files:
+    - ec2_vars.yml
+    - filebeat_vars.yml
+  become: true
+
+  tasks:
+    - name: Set up an instances
+      include_role:
+        name: "../../../roles/ec2_setup"
