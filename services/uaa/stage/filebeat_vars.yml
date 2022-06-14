@@ -1,0 +1,12 @@
+---
+filebeat_needed: true
+filebeat_download_url: https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.12.0-amd64.deb
+filebeat_download_path: /tmp/filebeat.deb
+app_name: uaa-airflow
+env: stage
+celery_logs_path: /app/logs/celery/*
+celery_beat_logs_path: /app/logs/celery_beat/*
+gunicorn_logs_path: /app/logs/gunicorn/gunicorn*.log*
+nginx_access_logs_path: /app/logs/nginx/*
+nginx_error_logs_path: /var/log/nginx/*
+ossec_logs_path: /app/ossec/logs/alerts/alerts.log

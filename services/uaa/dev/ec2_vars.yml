@@ -1,0 +1,15 @@
+---
+ami_name: "base-ubuntu18-py36*"
+instances:
+
+instance_group_name: uaa_core_hosts_dev
+tags:
+  "Env": "Prod"
+  "Service": "UAA"
+
+root_volume_size: 20
+additional_volume_size: 64
+is_public_ip_needed: false
+additional_volume_needed: false
+is_mounting_volume_needed: false
+nginx_needed: true
