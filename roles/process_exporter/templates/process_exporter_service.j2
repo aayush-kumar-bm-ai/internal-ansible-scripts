@@ -1,0 +1,15 @@
+[Unit]
+Description=Process Exporter for Prometheus
+Documentation=https://github.com/ncabatoff/process-exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User={{exporter_user}}
+Group={{exporter_user}}
+Type=simple
+Restart=on-failure
+ExecStart={{usr_bin_dir}}/{{exporter_name}} --config.path /etc/process_exporter/process_exporter.yaml --web.listen-address=:9256
+
+[Install]
+WantedBy=multi-user.target

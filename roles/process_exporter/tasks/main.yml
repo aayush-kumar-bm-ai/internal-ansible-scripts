@@ -1,0 +1,3 @@
+---
+- name: Installing Process Exporter
+  include_tasks: process_exporter.yml

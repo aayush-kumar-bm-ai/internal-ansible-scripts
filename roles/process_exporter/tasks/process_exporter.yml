@@ -1,0 +1,73 @@
+---
+- name: Setting Facts
+  set_fact:
+    exporter_name: "process_exporter"
+    exporter_package: "{{ exporter_url | split('/') | last | split('.tar') | first}}"
+
+- name: "Download {{ exporter_name }}"
+  get_url:
+    url: "{{ exporter_url }}"
+    dest: "{{exporter_tmp_path}}/{{exporter_package}}.tar.gz"
+
+- name: "Extract {{exporter_package}}.tar.gz into {{exporter_tmp_path}}"
+  ansible.builtin.unarchive:
+    remote_src: yes
+    src: "{{exporter_tmp_path}}/{{exporter_package}}.tar.gz"
+    dest: "{{exporter_tmp_path}}"
+
+- name: "Place {{exporter_name}} in {{usr_bin_dir}}"
+  become: true
+  ansible.builtin.copy:
+    remote_src: yes
+    src: "{{exporter_tmp_path}}/{{exporter_package}}/process-exporter"
+    dest: "{{usr_bin_dir}}/{{exporter_name}}"
+    owner: "{{exporter_user}}"
+    group: "{{exporter_user}}"
+    mode: 0755
+
+- name: "Create {{exporter_name}} conf dirs"
+  become: true
+  ansible.builtin.file:
+    path: "/etc/{{exporter_name}}"
+    state: directory
+    owner: "{{exporter_user}}"
+    group: "{{exporter_user}}"
+    mode: 0644
+
+- name: "Copy {{exporter_name}} configuration files"
+  become: true
+  template:
+    src: "{{exporter_name}}_conf.yml"
+    dest: "/etc/{{exporter_name}}/process_exporter.yaml"
+    owner: "{{exporter_user}}"
+    group: "{{exporter_user}}"
+    mode: 0644
+
+- name: "Copy {{exporter_name}} service file"
+  become: true
+  template:
+    src: "{{exporter_name}}_service.j2"
+    dest: "/etc/systemd/system/{{exporter_name}}.service"
+    mode: 0664
+
+- name: "Reread {{exporter_name}} configs for Systemd"
+  become: true
+  systemd: daemon_reload=yes
+
+- name: "Start service {{exporter_name}}"
+  become: true
+  systemd:
+    name: "{{exporter_name}}"
+    state: started
+
+- name: "Enable service {{exporter_name}}"
+  become: true
+  systemd:
+    name: "{{exporter_name}}"
+    enabled: yes
+
+- name: "Ensure {{exporter_name}} service is running"
+  become: true
+  systemd:
+    state: started
+    name: "{{exporter_name}}"

@@ -1,0 +1,9 @@
+---
+exporter_processes:
+  - gunicorn
+  - celery
+exporter_name: process_exporter
+exporter_url: https://github.com/ncabatoff/process-exporter/releases/download/v0.7.10/process-exporter-0.7.10.linux-amd64.tar.gz
+exporter_tmp_path: /tmp
+usr_bin_dir: /usr/local/bin
+exporter_user: bright_tech
