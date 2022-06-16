@@ -23,6 +23,8 @@
 
 - hosts: uaa_core_hosts
   gather_facts: false
+  become: true
+  strategy: free
   vars_files:
     - ec2_vars.yml
     - filebeat_vars.yml

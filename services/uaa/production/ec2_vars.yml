@@ -1,18 +1,18 @@
 ---
 ami_name: "base-ubuntu18-py36*"
 instances:
-  - name: "	p-uaa-airflow-worker-02"
+  - name: "p-uaa-airflow-worker-03"
     component: worker
     instance_type: c5.xlarge
 
-  - name: "	p-uaa-airflow-worker-03"
+  - name: "p-uaa-airflow-worker-04"
     component: worker
     instance_type: c5.xlarge
 
 instance_group_name: uaa_core_hosts
 tags:
-  "Env": "Prod"
-  "Service": "UAA"
+  "Env": "prod"
+  "Service": "uaa"
 
 root_volume_size: 20
 additional_volume_size: 64
