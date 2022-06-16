@@ -1,0 +1,12 @@
+---
+instance_key_name: backend-16-08-19
+instance_role: "payments-batch-submission-feedback-role-rw" # instance role for celery instances
+instance_region: us-west-2
+vpc_subnet_id: subnet-06cb244de96f111a0
+security_group_ids:
+  - sg-0ffb541fd5959587c
+  - sg-071ee056713735e46
+  - sg-01ae54a4a2ae1c001
+root_volume_type: gp2
+additional_volume_type: gp2
+additional_volume_device_name: "/dev/sdd"
