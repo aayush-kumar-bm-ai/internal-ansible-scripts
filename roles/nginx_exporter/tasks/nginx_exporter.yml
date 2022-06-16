@@ -1,38 +1,43 @@
 ---
-
 - name: "Downnload statsd exporter"
   get_url:
     url: "{{nginx_exporter_url}}"
     dest: "{{nginx_download_path}}"
 
-- name: Extract  tar.gz into 
+- name: Extract  tar.gz into
   ansible.builtin.unarchive:
     remote_src: yes
     src: "{{nginx_download_path}}"
     dest: "{{ nginx_extraction_dest }}"
 
 - name: Move executable to bin
+  become: true
   command: "sudo mv {{nginx_extraction_dest}}/nginx-prometheus-exporter {{usr_bin_dir}}/nginx-prometheus-exporter"
 
 - name: Copy nginx exporter service file
+  become: true
   template:
     src: nginx_exporter_service.j2
     dest: /etc/systemd/system/nginx_exporter.service
 
 - name: just force systemd to reread configs
+  become: true
   systemd: daemon_reload=yes
 
 - name: Start service nginx_exporter
+  become: true
   systemd:
     name: nginx_exporter
     state: started
 
 - name: enable service nginx_exporter
+  become: true
   systemd:
     name: nginx_exporter
     enabled: yes
 
 - name: Make sure a service is running
+  become: true
   systemd:
     state: started
     name: nginx_exporter
