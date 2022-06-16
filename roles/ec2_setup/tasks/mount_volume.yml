@@ -1,7 +1,7 @@
 ---
 - name: Create app directory
   become: true
-  file: 
+  file:
     path: /app
     state: directory
 
@@ -36,12 +36,12 @@
     - /app/logs/gunicorn/
     - /app/logs/celery/
     - /app/logs/nginx/
-    
+
 - name: Give perimission to /app
-  command: 'sudo chmod 777 -R /app'
+  command: "sudo chmod 777 -R /app"
 
 - name: Copy existing fstab
-  command: 'sudo cp /etc/fstab /etc/fstab.orig'
+  command: "sudo cp /etc/fstab /etc/fstab.orig"
 
 - name: Get UUID of attached volume
   shell: sudo blkid | grep dev/nvme1n1 | grep -oP '(?<=UUID=").*?(?=" TYPE)'
@@ -51,10 +51,9 @@
 - name: output
   debug:
     msg: "{{ uuid.stdout_lines[0] }}"
-    
+
 - name: Adding uuid to /etc/fstab
   blockinfile:
     path: /etc/fstab
     content: |
       UUID={{ uuid.stdout_lines[0] }}  /app  xfs  defaults,nofail  0  2
-
