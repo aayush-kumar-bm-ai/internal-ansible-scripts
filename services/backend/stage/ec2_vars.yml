@@ -1,9 +1,12 @@
 ---
-ami_name: "base-ubuntu18-py36*"
+ami_name: "backend-ubuntu18-py36*"
 instances: 
   - name: "stage-backend-app-server-01"  # Doesn't exist currently -- comment to be removed when created.
     component: app
     instance_type: c5a.2xlarge
+  - name: "stage-backend-celery-server-01"  # Doesn't exist currently -- comment to be removed when created.
+    component: celery
+    instance_type: c5a.2xlarge 
  
 
 instance_group_name: backend-stage
