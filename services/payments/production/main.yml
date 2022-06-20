@@ -29,11 +29,4 @@
     - name: Set up an instances
       include_role:
         name: "../../../roles/ec2_setup"
-
-    - name: Install Ossec
-      include_role:
-        name: "../../../roles/ossec"
-
-    - name: Configure filebeat
-      include_role:
-        name: "../../../roles/filebeat"
+d
