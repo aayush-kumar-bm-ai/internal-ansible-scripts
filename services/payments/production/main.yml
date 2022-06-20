@@ -29,4 +29,3 @@
     - name: Set up an instances
       include_role:
         name: "../../../roles/ec2_setup"
-d
