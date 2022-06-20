@@ -25,7 +25,7 @@
     - base_lts.yml
     - ec2_vars.yml
     - filebeat_vars.yml
-  become: yes
+  become: true
   tasks:
     - name: Set up an instances
       include_role:
