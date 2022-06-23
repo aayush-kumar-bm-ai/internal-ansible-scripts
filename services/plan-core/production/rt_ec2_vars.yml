@@ -1,0 +1,18 @@
+---
+instances:
+  - name: "rt-plan-core-server-01"
+    component: "celery, faust, gunicorn"
+    instance_type: t3a.medium
+
+instance_group_name: rt_plan_core_prod
+tags:
+  "Env": "r_test"
+  "Service": "plan core"
+
+ami_name: "base-ubuntu18-py36*"
+root_volume_size: 20
+additional_volume_size: 64
+is_public_ip_needed: false
+additional_volume_needed: false
+is_mounting_volume_needed: false
+nginx_needed: true

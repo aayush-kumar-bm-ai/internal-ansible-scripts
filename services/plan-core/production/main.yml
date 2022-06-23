@@ -1,33 +1,30 @@
-
 - hosts: localhost
+  gather_facts: false
   vars_files:
-      - ec2_vars.yml
+    - rt_base_lts.yml
+    - rt_ec2_vars.yml
   tasks:
-  - name: Create an instance
-    include_role:
-      name: "../../../roles/ec2"
-    vars:
-      ami_id: "{{ ec2_ami.images[0].image_id }}"
-      instance_name: "{{ item.name }}"
-      instance_component: "{{ item.component }}"
-      instance_type: "{{ item.instance_type }}"
-    with_items: "{{ instances }}"
-      
-- hosts: plan-core-hosts
+    - name: Gather information about {{ ami_name }} AMIs
+      amazon.aws.ec2_ami_info:
+        owners: 294639299176
+        filters:
+          name: "{{ami_name}}"
+      register: ec2_ami
+
+    - name: Create an instance
+      include_role:
+        name: "../../../roles/ec2"
+      vars:
+        instance_name: "{{ item.name }}"
+        ami_id: "{{ ec2_ami.images[-1].image_id }}"
+      with_items: "{{ instances }}"
+
+- hosts: rt_plan_core_prod
   vars_files:
-      - ec2_vars.yml
-      - filebeat_vars.yml
+    - rt_ec2_vars.yml
+    - filebeat_vars.yml
   become: yes
-
   tasks:
-  # - name: Set up an instances
-  #   include_role:
-  #     name: "../../../roles/ec2_setup"
-
-  # - name: Install Ossec
-  #   include_role:
-  #     name: "../../../roles/ossec"
-
-  - name: Configure filebeat
-    include_role:
-      name: "../../../roles/filebeat"
+    - name: Set up an instances
+      include_role:
+        name: "../../../roles/ec2_setup"
