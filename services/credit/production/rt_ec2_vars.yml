@@ -8,7 +8,7 @@ instances:
       gunicorn: true
 
 instance_group_name: rt_credit_prod
-tags:
+base_tags:
   "Env": "regression"
   "Service": "credit"
 
