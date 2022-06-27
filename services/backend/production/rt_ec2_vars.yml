@@ -8,7 +8,7 @@ instances:
 
 instance_group_name: rt_backend_prod
 base_tags:
-  "Env": "r_test"
+  "Env": "regression"
   "Service": "backend"
 
 ami_name: "backend-ubuntu18-py36*"
