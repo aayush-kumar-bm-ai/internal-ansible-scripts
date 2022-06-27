@@ -16,6 +16,8 @@
         name: "../../../roles/ec2"
       vars:
         instance_name: "{{ item.name }}"
+        instance_tags: "{{ item.instance_tags }}"
+        instance_type: "{{ item.instance_type }}"
         ami_id: "{{ ec2_ami.images[-1].image_id }}"
       with_items: "{{ instances }}"
 

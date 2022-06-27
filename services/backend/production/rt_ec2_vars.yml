@@ -1,15 +1,17 @@
 ---
 instances:
   - name: "rt-backend-server-01"
-    component: "beat, celery, gunicorn"
     instance_type: t3a.medium
+    instance_tags:
+      gunicorn: true
+      celery: true
 
 instance_group_name: rt_backend_prod
-tags:
+base_tags:
   "Env": "r_test"
   "Service": "backend"
 
-ami_name: "base-ubuntu18-py36*"
+ami_name: "backend-ubuntu18-py36*"
 root_volume_size: 20
 additional_volume_size: 64
 is_public_ip_needed: false
