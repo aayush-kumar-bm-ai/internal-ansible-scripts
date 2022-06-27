@@ -1,12 +1,15 @@
 ---
 instances:
   - name: "rt-credit-server-01"
-    component: "beat, celery, gunicorn"
     instance_type: t3a.medium
+    instance_tags:
+      celery_beat: true
+      celery: true
+      gunicorn: true
 
 instance_group_name: rt_credit_prod
 tags:
-  "Env": "r_test"
+  "Env": "regression"
   "Service": "credit"
 
 ami_name: "base-ubuntu18-py36*"
