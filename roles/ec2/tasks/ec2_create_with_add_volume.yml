@@ -4,19 +4,19 @@
     key_name: "{{ instance_key_name }}"
     instance_type: "{{ instance_type }}"
     instance_role: "{{instance_role}}"
-    image: 
+    image:
       id: "{{ ami_id }}"
-    wait: True                                     
+    wait: True
     network:
       assign_public_ip: "{{ is_public_ip_needed }}"
-    vpc_subnet_id: "{{ vpc_subnet_id }}"         
-    security_groups: "{{ security_group_ids }}"  
+    vpc_subnet_id: "{{ vpc_subnet_id }}"
+    security_groups: "{{ security_group_ids }}"
     filters:
       "tag:Name": "{{ instance_name }}"
-      image-id: "{{ ami_id }}" 
+      image-id: "{{ ami_id }}"
       instance-state-name: running
-      network-interface.subnet-id: "{{ vpc_subnet_id }}" 
-    tags: "{{ tags | combine({'Name': instance_name, 'Component': instance_component}) }}"
+      network-interface.subnet-id: "{{ vpc_subnet_id }}"
+    tags: "{{ base_tags | combine({'Name': instance_name, 'Beat': instance_tags.celery_beat | default(false, true), 'Gunicorn': instance_tags.gunicorn | default(false, true), 'Celery': instance_tags.celery | default(false, true), 'Faust': instance_tags.faust | default(false, true), 'Kafka': instance_tags.kafka | default(false, true) }) }}"
     region: "{{ instance_region }}"
     volumes:
       - device_name: /dev/sda1
@@ -27,7 +27,7 @@
 
 - name: Attach Volume
   amazon.aws.ec2_vol:
-    instance: '{{ attach_new_volumes.instance_id }}'
+    instance: "{{ attach_new_volumes.instance_id }}"
     volume_size: "{{ additional_volume_size|int }}"
     volume_type: "{{ additional_volume_type }}"
     device_name: "{{ additional_volume_device_name }}"
@@ -40,12 +40,12 @@
   amazon.aws.ec2_instance_info:
     filters:
       "tag:Name": "{{ instance_name }}"
-      instance-state-name: [ "running"]
+      instance-state-name: ["running"]
   register: ec2_object
 
 - name: Add the instance to host group
   ansible.builtin.add_host:
-    hostname: '{{ curr_instance.private_ip_address }}'
+    hostname: "{{ curr_instance.private_ip_address }}"
     ansible_connection: ssh
     ansible_user: ubuntu
     groups: "{{instance_group_name}}"
