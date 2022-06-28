@@ -1,37 +1,37 @@
 ---
 instances:
-  - name: "px-firestore-app-server-01" 
-    component: app 
+  - name: "px-firestore-app-server-01"
+    component: app
     instance_type: t3a.xlarge
   - name: "px-firestore-app-server-02"
-    component: app 
+    component: app
     instance_type: t3a.xlarge
   # - name: "px-firestore-app-server-03"  # Doesnt exist for now
-  #   component: app 
+  #   component: app
   #   instance_type: t3a.xlarge
   - name: "px-firestore-app-server-04"
-    component: app 
-    instance_type: t3a.xlarge 
-  - name: "px-firestore-app-server-05" 
-    component: app 
+    component: app
     instance_type: t3a.xlarge
-  - name: "px-firestore-celery-server-01" 
-    component: celery 
+  - name: "px-firestore-app-server-05"
+    component: app
+    instance_type: t3a.xlarge
+  - name: "px-firestore-celery-server-01"
+    component: celery
     instance_type: t3a.2xlarge
   - name: "px-firestore-celery-server-02"
-    component: celery 
+    component: celery
     instance_type: t3a.2xlarge
-  - name: "px-firestore-celery-server-03" 
-    component: celery 
+  - name: "px-firestore-celery-server-03"
+    component: celery
     instance_type: t3a.2xlarge
   - name: "px-firestore-celery-server-04"
-    component: celery 
+    component: celery
     instance_type: t3a.2xlarge
   - name: "px-firestore-celery-server-05"
-    component: celery 
+    component: celery
     instance_type: t3a.2xlarge
 
-instance_group_name: firestore-prod
+instance_group_name: firestore_prod
 tags:
   "Env": "Prod"
   "Service": "Firestore"
@@ -40,6 +40,6 @@ ami_name: "firestore-ubuntu18-py36*"
 root_volume_size: 20
 additional_volume_size: 64
 is_public_ip_needed: false
-additional_volume_needed: true 
-is_mounting_volume_needed: true 
+additional_volume_needed: true
+is_mounting_volume_needed: true
 nginx_needed: true

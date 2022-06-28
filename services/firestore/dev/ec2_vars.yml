@@ -1,7 +1,9 @@
 ---
-instances: 
+instances:
+  - name: "d-firestore-app-server-01" 
+    component: app 
+    instance_type: c5.2xlarge
 
-instance_type: c5.2xlarge
 instance_group_name: firestore-dev
 tags:
   "Env": "Dev"

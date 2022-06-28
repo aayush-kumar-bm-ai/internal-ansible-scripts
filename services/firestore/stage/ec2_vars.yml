@@ -1,11 +1,16 @@
 ---
+ami_name: "firestore-ubuntu18-py36*"
 instances: 
+  - name: "stage-firestore-app-server-01" 
+    component: app 
+    instance_type: t3a.xlarge
 
 instance_group_name: firestore-stage
 tags:
   "Env": "Stage"
   "Component": "App"
-instance_type: t3a.2xlarge
+  "Service": "Firestore"
+
 root_volume_size: 30
 additional_volume_size: 128
 is_public_ip_needed: false
