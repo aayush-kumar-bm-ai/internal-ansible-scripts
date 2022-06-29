@@ -8,6 +8,11 @@ instances:
       faust: true
       gunicorn: true
 
+  - name: "rt-plan-core-executor-01"
+    instance_type: t3a.medium
+    instance_tags:
+      faust: true
+
 instance_group_name: rt_plan_core_prod
 base_tags:
   "Env": "regression"
