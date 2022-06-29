@@ -1,14 +1,14 @@
 ---
 instances:
-  - name: "rt-anon-server-01"
+  - name: "rt-experimentation-server-01"
     instance_type: t3a.medium
     instance_tags:
       gunicorn: true
 
-instance_group_name: rt_anon_prod
+instance_group_name: rt_exper_prod
 base_tags:
   "Env": "regression"
-  "Service": "anonymous-user"
+  "Service": "experimentation"
 
 ami_name: "base-ubuntu18-py38*"
 root_volume_size: 20
