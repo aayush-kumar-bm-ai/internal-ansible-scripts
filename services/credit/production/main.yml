@@ -24,7 +24,7 @@
 - hosts: rt_credit_prod
   vars_files:
     - rt_ec2_vars.yml
-    - filebeat_vars.yml
+    - rt_filebeat_vars.yml
   become: yes
   tasks:
     - name: Set up an instances

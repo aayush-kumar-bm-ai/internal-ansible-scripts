@@ -1,5 +1,5 @@
 ---
-ami_name: "base-ubuntu18-py36*"
+ami_name: "base-ubuntu18-py38*"
 instances:
   - name: "rt-goal-server-01"
     instance_type: t3a.medium
