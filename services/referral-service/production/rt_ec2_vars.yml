@@ -1,0 +1,22 @@
+---
+instances:
+  - name: "rt-referral-server-01"
+    instance_type: t3a.medium
+    instance_tags:
+      celery_beat: true
+      celery: true
+      gunicorn: true
+      faust: true
+
+instance_group_name: rt_referral_prod
+base_tags:
+  "Env": "regression"
+  "Service": "referral"
+
+ami_name: "base-ubuntu18-py38*"
+root_volume_size: 20
+additional_volume_size: 64
+is_public_ip_needed: false
+additional_volume_needed: false
+is_mounting_volume_needed: false
+nginx_needed: true
