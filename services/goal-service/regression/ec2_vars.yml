@@ -7,7 +7,7 @@ instances:
       gunicorn: true
       celery: true
 
-instance_group_name: rt_goal_prod
+instance_group_name: goal_regression
 base_tags:
   "Env": "regression"
   "Service": "goal_service"
