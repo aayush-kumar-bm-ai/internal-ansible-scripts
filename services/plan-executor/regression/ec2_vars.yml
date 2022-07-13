@@ -1,0 +1,20 @@
+---
+ami_name: "base-ubuntu18-py38*"
+instances:
+  - name: "rt-plan-core-executor-01"
+    instance_type: t3a.medium
+    instance_tags:
+      faust: true
+
+instance_group_name: plan_exec_regerssion
+base_tags:
+  "Env": "regression"
+  "Service": "plan_executor"
+  "Group": "MLE"
+
+root_volume_size: 20
+additional_volume_size: 64
+is_public_ip_needed: false
+additional_volume_needed: false
+is_mounting_volume_needed: false
+nginx_needed: true
