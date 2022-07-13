@@ -1,4 +1,5 @@
 ---
+ami_name: "base-ubuntu18-py36*"
 instances:
 
 instance_group_name: value_engine_prod
@@ -6,7 +7,6 @@ tags:
   "Env": "prod"
   "Service": "value_engine"
 
-ami_name: "base-ubuntu18-py36*"
 root_volume_size: 20
 additional_volume_size: 128
 is_public_ip_needed: false
