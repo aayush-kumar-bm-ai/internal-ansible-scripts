@@ -8,15 +8,11 @@ instances:
       faust: true
       gunicorn: true
 
-  - name: "rt-plan-core-executor-01"
-    instance_type: t3a.medium
-    instance_tags:
-      faust: true
-
-instance_group_name: rt_plan_core_prod
+instance_group_name: plan_core_regression
 base_tags:
   "Env": "regression"
   "Service": "plan_core"
+  "Group": "MLE"
 
 root_volume_size: 20
 additional_volume_size: 64
