@@ -3,14 +3,14 @@ instances:
   - name: "rt-submission-server-01"
     instance_type: t3a.medium
     instance_tags:
-      celery_beat: true
       celery: true
       gunicorn: true
 
-instance_group_name: rt_submission_prod
+instance_group_name: submission_regression
 base_tags:
   "Env": "regression"
   "Service": "submission"
+  "Group": "MLE"
 
 ami_name: "base-ubuntu18-py38*"
 root_volume_size: 20
