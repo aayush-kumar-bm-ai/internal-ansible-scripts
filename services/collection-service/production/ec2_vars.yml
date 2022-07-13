@@ -1,17 +1,12 @@
 ---
+ami_name: "base-ubuntu18-py38*"
 instances:
-  - name: "rt-collection-server-01"
-    instance_type: t3a.medium
-    instance_tags:
-      gunicorn: true
-      celery: true
 
-instance_group_name: rt_collection_prod
+instance_group_name: collection_prod
 base_tags:
-  "Env": "regression"
+  "Env": "prod"
   "Service": "collection_service"
 
-ami_name: "base-ubuntu18-py38*"
 root_volume_size: 20
 additional_volume_size: 64
 is_public_ip_needed: false
