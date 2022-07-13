@@ -4,8 +4,8 @@ instances:
   - name: "rt-plan-core-server-01"
     instance_type: t3a.medium
     instance_tags:
+      celery_beat: true
       celery: true
-      faust: true
       gunicorn: true
 
 instance_group_name: plan_core_regression

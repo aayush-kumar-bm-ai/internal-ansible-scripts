@@ -1,8 +1,8 @@
 - hosts: localhost
   gather_facts: false
   vars_files:
-    - rt_base_lts.yml
-    - rt_ec2_vars.yml
+    - base_lts.yml
+    - ec2_vars.yml
   tasks:
     - name: Gather information about {{ ami_name }} AMIs
       amazon.aws.ec2_ami_info:
@@ -23,7 +23,7 @@
 
 - hosts: plan_core_regression
   vars_files:
-    - rt_ec2_vars.yml
+    - ec2_vars.yml
     - filebeat_vars.yml
   become: yes
   tasks:
