@@ -7,10 +7,11 @@ instances:
       celery: true
       gunicorn: true
 
-instance_group_name: rt_value_engine_prod
+instance_group_name: value_engine_regression
 base_tags:
   "Env": "regression"
-  "Service": "value-engine"
+  "Service": "value_engine"
+  "Group": "MLE"
 
 ami_name: "base-ubuntu18-py38*"
 root_volume_size: 20
