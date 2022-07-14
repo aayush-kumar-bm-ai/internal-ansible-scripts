@@ -1,16 +1,17 @@
 ---
+ami_name: "base-ubuntu18-py38*"
 instances:
   - name: "rt-bank-integration-server-01"
     instance_type: t3a.medium
     instance_tags:
       gunicorn: true
 
-instance_group_name: rt_bankint_prod
+instance_group_name: bankint_regression
 base_tags:
   "Env": "regression"
-  "Service": "bank-integration"
+  "Service": "bank_integrations"
+  "Group": "banking"
 
-ami_name: "base-ubuntu18-py38*"
 root_volume_size: 20
 additional_volume_size: 64
 is_public_ip_needed: false
