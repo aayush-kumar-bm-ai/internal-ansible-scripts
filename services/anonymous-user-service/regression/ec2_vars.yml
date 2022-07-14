@@ -10,7 +10,7 @@ instances:
 instance_group_name: anon_regression
 base_tags:
   "Env": "regression"
-  "Service": "anonymous_user"
+  "Service": "anonymous_user_service"
   "Group": "backend"
 
 ami_name: "base-ubuntu18-py38*"

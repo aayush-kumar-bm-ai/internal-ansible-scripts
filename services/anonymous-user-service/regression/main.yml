@@ -20,13 +20,12 @@
         instance_type: "{{ item.instance_type }}"
         ami_id: "{{ ec2_ami.images[-1].image_id }}"
       with_items: "{{ instances }}"
-
-- hosts: anon_regression
-  vars_files:
-    - ec2_vars.yml
-    - filebeat_vars.yml
-  become: yes
-  tasks:
-    - name: Set up an instances
-      include_role:
-        name: "../../../roles/ec2_setup"
+# - hosts: anon_regression
+#   vars_files:
+#     - ec2_vars.yml
+#     - filebeat_vars.yml
+#   become: yes
+#   tasks:
+#     - name: Set up an instances
+#       include_role:
+#         name: "../../../roles/ec2_setup"
