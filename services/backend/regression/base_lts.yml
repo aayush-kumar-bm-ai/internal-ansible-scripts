@@ -4,7 +4,7 @@ instance_role: EC2BaseRole
 instance_region: us-west-2
 vpc_subnet_id: subnet-03e86548fbbfcbf2a
 security_group_ids:
-  - sg-0abbb451f94d3f8cd
+  - all-internal-vpn-stage
 root_volume_type: gp2
 additional_volume_type: gp2
 additional_volume_device_name: "/dev/sdd"

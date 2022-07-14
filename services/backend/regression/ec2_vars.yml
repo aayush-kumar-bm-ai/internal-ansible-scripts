@@ -1,4 +1,5 @@
 ---
+ami_name: "backend-ubuntu18-py36*"
 instances:
   - name: "rt-backend-server-01"
     instance_type: t3a.medium
@@ -6,12 +7,12 @@ instances:
       gunicorn: true
       celery: true
 
-instance_group_name: rt_backend_prod
+instance_group_name: backend_regression
 base_tags:
   "Env": "regression"
   "Service": "backend"
+  "Group": "backend"
 
-ami_name: "backend-ubuntu18-py36*"
 root_volume_size: 20
 additional_volume_size: 64
 is_public_ip_needed: false
