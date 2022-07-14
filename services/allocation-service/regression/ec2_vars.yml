@@ -1,4 +1,5 @@
 ---
+ami_name: "base-ubuntu18-py38*"
 instances:
   - name: "rt-allocation-server-01"
     instance_type: t3a.medium
@@ -6,12 +7,12 @@ instances:
       gunicorn: true
       celery: true
 
-instance_group_name: rt_allocation_prod
+instance_group_name: allocation_regression
 base_tags:
   "Env": "regression"
   "Service": "Allocation"
+  "Group": "MLE"
 
-ami_name: "base-ubuntu18-py38*"
 root_volume_size: 20
 additional_volume_size: 64
 is_public_ip_needed: false
