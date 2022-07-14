@@ -1,4 +1,5 @@
 ---
+ami_name: "base-ubuntu18-py38*"
 instances:
   - name: "rt-referral-server-01"
     instance_type: t3a.medium
@@ -8,12 +9,12 @@ instances:
       gunicorn: true
       faust: true
 
-instance_group_name: rt_referral_prod
+instance_group_name: referral_regression
 base_tags:
   "Env": "regression"
   "Service": "referral"
+  "Group": "backend"
 
-ami_name: "base-ubuntu18-py38*"
 root_volume_size: 20
 additional_volume_size: 64
 is_public_ip_needed: false
