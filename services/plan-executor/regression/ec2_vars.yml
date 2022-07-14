@@ -6,7 +6,7 @@ instances:
     instance_tags:
       faust: true
 
-instance_group_name: plan_exec_regerssion
+instance_group_name: plan_exec_regression
 base_tags:
   "Env": "regression"
   "Service": "plan_executor"
