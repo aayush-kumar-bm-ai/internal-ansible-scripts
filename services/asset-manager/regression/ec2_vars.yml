@@ -1,4 +1,5 @@
 ---
+ami_name: "base-ubuntu18-py38*"
 instances:
   - name: "rt-assetmgr-server-01"
     instance_type: t3a.medium
@@ -6,12 +7,11 @@ instances:
       gunicorn: true
       celery: true
 
-instance_group_name: rt_assetmgr_prod
 base_tags:
   "Env": "regression"
   "Service": "asset_manager"
 
-ami_name: "base-ubuntu18-py38*"
+instance_group_name: assetmgr_regression
 root_volume_size: 20
 additional_volume_size: 64
 is_public_ip_needed: false
