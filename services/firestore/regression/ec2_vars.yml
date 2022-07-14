@@ -1,4 +1,5 @@
 ---
+ami_name: "base-ubuntu18-py38*"
 instances:
   - name: "rt-firestore-server-01"
     instance_type: t3a.medium
@@ -6,14 +7,14 @@ instances:
       gunicorn: true
       celery: true
 
-instance_group_name: rt_firestore_prod
+instance_group_name: firestore_regression
 base_tags:
   "Env": "regression"
   "Service": "firestore"
+  "Group": "platforms"
 
-ami_name: "base-ubuntu18-py38*"
 root_volume_size: 20
-additional_volume_size: 64
+additional_volume_size: 0
 is_public_ip_needed: false
 additional_volume_needed: false
 is_mounting_volume_needed: false

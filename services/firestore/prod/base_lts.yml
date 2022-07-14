@@ -1,5 +1,4 @@
 ---
-#ami_id: ami-0a6ae4e04e3c7ddaf
 instance_key_name: backend-16-08-19
 instance_role: EC2BaseRole
 instance_region: us-west-2

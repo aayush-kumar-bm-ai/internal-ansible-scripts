@@ -33,8 +33,9 @@ instances:
 
 instance_group_name: firestore_prod
 tags:
-  "Env": "Prod"
-  "Service": "Firestore"
+  "Env": "prod"
+  "Service": "firestore"
+  "Group": "platforms"
 
 ami_name: "firestore-ubuntu18-py36*"
 root_volume_size: 20

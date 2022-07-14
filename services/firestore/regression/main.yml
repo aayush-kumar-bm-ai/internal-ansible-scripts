@@ -21,7 +21,7 @@
         ami_id: "{{ ec2_ami.images[-1].image_id }}"
       with_items: "{{ instances }}"
 
-- hosts: firestore_prod
+- hosts: firestore_regression
   vars_files:
     - ec2_vars.yml
     - filebeat_vars.yml
