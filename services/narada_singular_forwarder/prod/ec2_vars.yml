@@ -1,0 +1,23 @@
+---
+ami_name: "base-ubuntu18-py38*"
+instances: 
+  - name: "p-narada-singular-worker-01"
+    instance_type: c5.xlarge
+    instance_tags:
+      celery: true
+      faust: true
+
+instance_group_name: narada_singular_prod
+base_tags:
+  "Env": "prod"
+  "Service": "narada_singular"
+  "Team": "platforms"
+
+root_volume_size: 20
+additional_volume_size: 0
+is_public_ip_needed: false
+additional_volume_needed: false 
+is_mounting_volume_needed: false 
+nginx_needed: true
+filebeat_needed: true
+add_deployment_cron: true
