@@ -1,24 +1,20 @@
 ---
-instances: s-allocation-service-01
+ami_name: "base-ubuntu18-py38*"
+instances:
+  - name: "s-allocation-server-01"
+    instance_type: t3a.medium
+    instance_tags:
+      beat: true
+      gunicorn: true
+      celery: true
+      faust: true
 
-instance_group_name: allocation-stage
-tags:
-  "Env": "Stage"
-  "Component": "App"
-instance_key_name: backend-16-08-19
-ami_id: ami-0e0dfde30ee505cc5
-instance_type: t3.medium
-instance_region: us-west-2
-vpc_subnet_id: subnet-03e86548fbbfcbf2a
-security_group_ids:
-  - sg-0d2c34bb1cc93d18e
-root_volume_type: gp2
-root_volume_size: 30
-is_public_ip_needed: false
-additional_volume_needed: false
-is_mounting_volume_needed: false
-additional_volume_size: 64
-additional_volume_type: gp2
-additional_volume_device_name: /dev/sdd
+instance_group_name: allocation_stage
+base_tags:
+  "Env": "stage"
+  "Service": "allocation"
+  "Team": "MLE"
+
+root_volume_size: 20
 nginx_needed: true
-python_version: 3.8
+add_deployment_cron: true
