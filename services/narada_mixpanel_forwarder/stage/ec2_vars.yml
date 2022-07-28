@@ -1,0 +1,24 @@
+---
+ami_name: "base-ubuntu18-py38*"
+instances: 
+  - name: "s-narada-mixpanel-server-01"
+    instance_type: t3a.medium
+    instance_tags:
+      gunicorn: true
+      celery: true
+      faust: true #TODO: fix generic consumer notation
+
+instance_group_name: narada_mixpanel_stage
+base_tags:
+  "Env": "stage"
+  "Service": "narada_mixpanel"
+  "Team": "platforms"
+
+root_volume_size: 20
+additional_volume_size: 0
+is_public_ip_needed: false
+additional_volume_needed: false 
+is_mounting_volume_needed: false 
+nginx_needed: true
+filebeat_needed: true
+add_deployment_cron: true

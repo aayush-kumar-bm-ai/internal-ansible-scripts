@@ -1,0 +1,45 @@
+---
+ami_name: "base-ubuntu18-py38*"
+instances: 
+  - name: "p-narada-mixpanel-app-01"
+    instance_type: t3a.medium
+    instance_tags:
+      gunicorn: true
+
+  - name: "p-narada-mixpanel-app-02"
+    instance_type: t3a.medium
+    instance_tags:
+      gunicorn: true
+
+  - name: "p-narada-mixpanel-worker-01"
+    instance_type: c5a.xlarge
+    instance_tags:
+      celery: true
+      faust: true
+
+  - name: "p-narada-mixpanel-worker-02"
+    instance_type: c5a.xlarge
+    instance_tags:
+      celery: true
+      faust: true
+
+  - name: "p-narada-mixpanel-worker-03"
+    instance_type: c5a.xlarge
+    instance_tags:
+      celery: true
+      faust: true
+
+instance_group_name: narada_mixpanel_prod
+base_tags:
+  "Env": "prod"
+  "Service": "narada_mixpanel"
+  "Team": "platforms"
+
+root_volume_size: 20
+additional_volume_size: 0
+is_public_ip_needed: false
+additional_volume_needed: false 
+is_mounting_volume_needed: false 
+nginx_needed: true
+filebeat_needed: true
+add_deployment_cron: true
