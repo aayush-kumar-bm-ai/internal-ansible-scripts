@@ -1,13 +1,15 @@
 ---
 - name: Create Ec2 instance
-  include_tasks: ec2_create_with_add_volume.yml
+  # include_tasks: ec2_create_with_add_volume.yml
+  debug:
+    msg: "You are about to create an instance with additional volume attached. Please check your vars to correct this.\n\n ------------- To enable volume added instances, please modify the role source code -------------\n\n"
   when: additional_volume_needed
 
 - name: Create EC2 instance without additional volume
   include_tasks: ec2_without_volume.yml
   when: not additional_volume_needed
 
-- name: "Wait for ssh to enable on {{ instance_group_name }} {{ curr_instance.private_ip_address }}"
+- name: "Wait for ssh to enable on {{ instance_group_name }}"
   wait_for: 
     host: "{{ curr_instance.private_ip_address }}"
     port: 22 
