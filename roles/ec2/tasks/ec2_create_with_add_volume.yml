@@ -16,7 +16,7 @@
       image-id: "{{ ami_id }}" 
       instance-state-name: running
       network-interface.subnet-id: "{{ vpc_subnet_id }}" 
-    tags: "{{ tags | combine({'Name': instance_name, 'Component': instance_component}) }}"
+    tags: "{{ base_tags | combine({'Name': instance_name, 'Beat': instance_tags.celery_beat | default(false, true), 'Gunicorn': instance_tags.gunicorn | default(false, true), 'Celery': instance_tags.celery | default(false, true), 'Faust': instance_tags.faust | default(false, true), 'Kafka': instance_tags.kafka | default(false, true), 'Consumer': instance_tags.consumer | default(false, true)  }) }}"
     region: "{{ instance_region }}"
     volumes:
       - device_name: /dev/sda1
@@ -31,17 +31,15 @@
     volume_size: "{{ additional_volume_size|int }}"
     volume_type: "{{ additional_volume_type }}"
     device_name: "{{ additional_volume_device_name }}"
+    tags:
+        Name: "{{ instance_name }}-additional"
+        Env: "{{ base_tags.Env }}"
+        Service: "{{ base_tags.Service }}"
   loop: "{{ ec2.instances }}"
   loop_control:
     loop_var: attach_new_volumes
   when: additional_volume_needed
-
-- name: Gather information about instance with a tag key Name and value
-  amazon.aws.ec2_instance_info:
-    filters:
-      "tag:Name": "{{ instance_name }}"
-      instance-state-name: [ "running"]
-  register: ec2_object
+  register: ec2_addi_volume
 
 - name: Add the instance to host group
   ansible.builtin.add_host:
@@ -49,6 +47,23 @@
     ansible_connection: ssh
     ansible_user: ubuntu
     groups: "{{instance_group_name}}"
-  loop: "{{ ec2_object.instances }}"
+  loop: "{{ ec2.instances }}"
   loop_control:
     loop_var: curr_instance
+
+
+
+# ------- Force tagging code for volumes ---------
+
+# - name: Tagging root volume with instance name, env and service tags
+#   amazon.aws.ec2_tag:
+#     region: "{{ instance_region }}"
+#     resource: "{{ curr_map.ebs.volume_id }}"
+#     state: present
+#     tags:
+#       Name: "{{ instance_name }}"
+#       Env: "{{ base_tags.Env }}"
+#       Service: "{{ base_tags.Service }}"
+#   loop: "{{ ec2.instances[0].block_device_mappings }}"
+#   loop_control:
+#     loop_var: curr_map
