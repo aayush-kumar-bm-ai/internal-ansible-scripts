@@ -17,7 +17,7 @@
       instance-state-name: running
       network-interface.subnet-id: "{{ vpc_subnet_id }}" 
     region: "{{ instance_region }}"
-    tags: "{{ tags | combine({'Name': instance_name, 'Component': instance_component}) }}"
+    tags: "{{ base_tags | combine({'Name': instance_name, 'Beat': instance_tags.celery_beat | default(false, true), 'Gunicorn': instance_tags.gunicorn | default(false, true), 'Celery': instance_tags.celery | default(false, true), 'Faust': instance_tags.faust | default(false, true), 'Kafka': instance_tags.kafka | default(false, true), 'Consumer': instance_tags.consumer | default(false, true)  }) }}"
     volumes:
       - device_name: /dev/sda1
         ebs:
@@ -25,19 +25,12 @@
           volume_size: "{{ root_volume_size|int }}"
   register: ec2
 
-- name: Gather information about instance with a tag key Name and value
-  amazon.aws.ec2_instance_info:
-    filters:
-      "tag:Name": "{{ instance_name }}"
-      instance-state-name: [ "running"]
-  register: ec2_object
-
 - name: Add the instance to host group
   ansible.builtin.add_host:
     hostname: '{{ curr_instance.private_ip_address }}'
     ansible_connection: ssh
     ansible_user: ubuntu
     groups: "{{instance_group_name}}"
-  loop: "{{ ec2_object.instances }}"
+  loop: "{{ ec2.instances }}"
   loop_control:
     loop_var: curr_instance
