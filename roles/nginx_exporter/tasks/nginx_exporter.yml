@@ -1,11 +1,11 @@
 ---
 
-- name: "Downnload statsd exporter"
+- name: "Download nginx exporter"
   get_url:
     url: "{{nginx_exporter_url}}"
     dest: "{{nginx_download_path}}"
 
-- name: Extract  tar.gz into 
+- name: Extract nginx_exporter tar.gz into 
   ansible.builtin.unarchive:
     remote_src: yes
     src: "{{nginx_download_path}}"
@@ -15,11 +15,11 @@
   command: "sudo mv {{nginx_extraction_dest}}/nginx-prometheus-exporter {{usr_bin_dir}}/nginx-prometheus-exporter"
 
 - name: Copy nginx exporter service file
-  template:
+  ansible.builtin.template:
     src: nginx_exporter_service.j2
     dest: /etc/systemd/system/nginx_exporter.service
 
-- name: just force systemd to reread configs
+- name: Force systemd to reread configs
   systemd: daemon_reload=yes
 
 - name: Start service nginx_exporter
@@ -36,3 +36,8 @@
   systemd:
     state: started
     name: nginx_exporter
+
+- name: Update Brightmoney nginx logrotation
+  ansible.builtin.template:
+    src: logrotate.d/bright_nginx
+    dest: /etc/logrotate.d/bright_nginx
