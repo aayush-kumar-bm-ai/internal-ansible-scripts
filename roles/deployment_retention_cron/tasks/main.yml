@@ -1,0 +1,8 @@
+- name: Creates a cron file under /etc/cron.d
+  ansible.builtin.cron:
+    name: Bright deployment retention
+    minute: "*"
+    user: "bright_tech"
+    job: "cd /app/deploy && ls -Ut1 | sed '/^current/d' | tail -n+12 | xargs rm -r"
+    cron_file: ansible_deployment_retention
+    state: present

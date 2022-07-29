@@ -1,9 +1,13 @@
 ---
+- name: Setup auto deployment cleanup cron
+  include_role: 
+    name: "../../../roles/deployment_retention_cron" 
+  when: add_deployment_cron
 
-- name: Mount Volume
-  include_tasks: mount_volume.yml
-  when: additional_volume_needed and is_mounting_volume_needed
-  
+# - name: Mount Volume
+#   include_tasks: mount_volume.yml
+#   when: additional_volume_needed and is_mounting_volume_needed
+
 - name: EC2 Connect
   include_tasks: ec2_connect_setup.yml
 
@@ -11,7 +15,7 @@
   become_user: bright_tech
   become: true
   pip:
-    name: 
+    name:
       - virtualenv
       - virtualenvwrapper
 
@@ -20,18 +24,18 @@
   when: nginx_needed
 
 - name: Install nodexporter
-  include_role: 
+  include_role:
     name: "../../../roles/node_exporter"
 
 - name: Install statsd
-  include_role: 
+  include_role:
     name: "../../../roles/statsd_exporter"
 
 - name: Install Ossec
-  include_role: 
+  include_role:
     name: "../../../roles/ossec"
 
 - name: Install filebeat
-  include_role: 
+  include_role:
     name: "../../../roles/filebeat"
   when: filebeat_needed
