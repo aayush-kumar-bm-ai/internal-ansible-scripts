@@ -16,5 +16,9 @@ base_tags:
   "Team": "MLE"
 
 root_volume_size: 20
+additional_volume_size: 0
+is_public_ip_needed: false
+additional_volume_needed: false
+is_mounting_volume_needed: false
 nginx_needed: true
 add_deployment_cron: true
