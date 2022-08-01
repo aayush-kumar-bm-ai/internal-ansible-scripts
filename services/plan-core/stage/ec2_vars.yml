@@ -1,0 +1,23 @@
+---
+ami_name: "base-ubuntu18-py38*"
+instances:
+  - name: "s-plan-core-server-01"
+    instance_type: t3a.medium
+    instance_tags:
+      celery_beat: true
+      celery: true
+      gunicorn: true
+
+instance_group_name: plan_core_stage
+base_tags:
+  "Env": "stage"
+  "Service": "plan_core"
+  "Group": "MLE"
+
+root_volume_size: 20
+additional_volume_size: 0
+is_public_ip_needed: false
+additional_volume_needed: false
+is_mounting_volume_needed: false
+nginx_needed: true
+add_deployment_cron: true

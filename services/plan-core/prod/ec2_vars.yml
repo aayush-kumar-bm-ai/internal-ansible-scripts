@@ -1,0 +1,53 @@
+---
+ami_name: "base-ubuntu18-py38*"
+instances:
+  - name: "px-plan-core-app-server-01"
+    instance_type: t3a.medium
+    instance_role: django-migrations-s3-policy
+    instance_tags:
+      gunicorn: true
+
+  - name: "px-plan-core-app-server-02"
+    instance_type: t3a.medium
+    instance_role: EC2BaseRole
+    instance_tags:
+      gunicorn: true
+
+  - name: "px-plan-core-celery-server-01"
+    instance_type: t3a.medium
+    instance_role: EC2BaseRole
+    instance_tags:
+      celery: true
+
+  - name: "px-plan-core-celery-server-02"
+    instance_type: t3a.medium
+    instance_role: EC2BaseRole
+    instance_tags:
+      celery: true
+  
+  - name: "px-plan-core-faust-server-01"
+    instance_type: t3a.medium
+    instance_role: EC2BaseRole
+    instance_tags:
+      faust: true
+  
+  - name: "px-plan-core-faust-server-02"
+    instance_type: t3a.medium
+    instance_role: EC2BaseRole
+    instance_tags:
+      faust: true
+
+
+instance_group_name: plan_core_prod
+base_tags:
+  "Env": "prod"
+  "Service": "plan_core_service"
+  "Team": "MLE"
+
+root_volume_size: 20
+additional_volume_size: 0
+is_public_ip_needed: false
+additional_volume_needed: false
+is_mounting_volume_needed: false
+nginx_needed: true
+add_deployment_cron: true
