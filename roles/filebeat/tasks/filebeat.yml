@@ -75,3 +75,8 @@
   systemd:
     name: filebeat
     state: restarted
+
+- name: Enable service filebeat
+  systemd:
+    name: filebeat
+    enabled: yes
