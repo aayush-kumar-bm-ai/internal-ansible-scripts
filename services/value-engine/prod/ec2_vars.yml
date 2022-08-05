@@ -13,13 +13,13 @@ instances:
     instance_tags:
       gunicorn: true
 
-  - name: "px-ve-app-server-01"
+  - name: "px-ve-celery-server-01"
     instance_type: t3a.medium
     instance_role: EC2BaseRole
     instance_tags:
       celery: true
 
-  - name: "px-ve-app-server-02"
+  - name: "px-ve-celery-server-02"
     instance_type: t3a.medium
     instance_role: EC2BaseRole
     instance_tags:
