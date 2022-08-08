@@ -1,0 +1,9 @@
+---
+instance_key_name: backend-16-08-19
+instance_region: us-west-2
+vpc_subnet_id: subnet-03e86548fbbfcbf2a
+security_group_ids:
+  - all-internal-vpn-stage
+root_volume_type: gp2
+additional_volume_type: gp2
+additional_volume_device_name: "/dev/sdd"
