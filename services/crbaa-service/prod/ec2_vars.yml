@@ -2,7 +2,7 @@
 ami_name: "base-ubuntu18-py38*"
 instances:
   - name: "p-uaa-crbaa-server-01"
-    instance_type: t3a.xlarge
+    instance_type: t3a.medium
     instance_role: EC2BaseRole
     instance_tags:
       gunicorn: true
