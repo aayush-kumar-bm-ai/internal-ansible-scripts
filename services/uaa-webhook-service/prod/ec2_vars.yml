@@ -1,0 +1,28 @@
+---
+ami_name: "base-ubuntu18-py38*"
+instances:
+  - name: "p-uaa-webhook-01"
+    instance_type: c5a.xlarge
+    instance_role: EC2BaseRole
+    instance_tags:
+      celery: true
+
+  - name: "p-uaa-webhook-02"
+    instance_type: c5a.xlarge
+    instance_role: EC2BaseRole
+    instance_tags:
+      celery: true
+
+instance_group_name: uaa_webhook_prod
+base_tags:
+  "Env": "prod"
+  "Service": "uaa_webhook_service"
+  "Team": "UAA"
+
+root_volume_size: 20
+additional_volume_size: 0
+is_public_ip_needed: false
+additional_volume_needed: false
+is_mounting_volume_needed: false
+nginx_needed: true
+add_deployment_cron: true
