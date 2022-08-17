@@ -6,6 +6,12 @@ instances:
     instance_role: EC2BaseRole
     instance_tags:
       gunicorn: true
+    
+  - name: "p-uaa-core-celery-01"
+    instance_type: c5a.xlarge
+    instance_role: EC2BaseRole
+    instance_tags:
+      celery: true
 
 instance_group_name: uaa_core_prod
 base_tags:
