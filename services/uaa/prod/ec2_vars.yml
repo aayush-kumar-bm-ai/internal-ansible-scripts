@@ -13,6 +13,12 @@ instances:
     instance_tags:
       celery: true
 
+  - name: "p-uaa-beat-migration-01"
+    instance_type: t3a.micro
+    instance_role: EC2BaseRole
+    instance_tags:
+      beat: true
+
 instance_group_name: uaa_core_prod
 base_tags:
   "Env": "prod"
