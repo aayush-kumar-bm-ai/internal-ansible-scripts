@@ -3,31 +3,31 @@ ami_name: "base-ubuntu18-py38*"
 instances:
   - name: p-credit-app-server-01
     instance_type: t3a.large
-    instance_role: EC2BaseRole
+    instance_role: bright-money-credit-s3-role
     instance_tags:
       gunicorn: true
     
   - name: p-credit-app-server-02
     instance_type: t3a.large
-    instance_role: EC2BaseRole
+    instance_role: bright-money-credit-s3-role
     instance_tags:
       gunicorn: true
     
   - name: p-credit-beat-server-01
     instance_type: t3a.micro
-    instance_role: EC2BaseRole
+    instance_role: bright-money-credit-s3-role
     instance_tags:
       beat: true
     
   - name: p-credit-celery-server-01
     instance_type: t3a.large
-    instance_role: EC2BaseRole
+    instance_role: bright-money-credit-s3-role
     instance_tags:
       celery: true
     
   - name: p-credit-celery-server-02
     instance_type: t3a.large
-    instance_role: EC2BaseRole
+    instance_role: bright-money-credit-s3-role
     instance_tags:
       celery: true
     
