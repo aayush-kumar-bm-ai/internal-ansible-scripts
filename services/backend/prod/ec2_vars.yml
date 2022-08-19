@@ -1,0 +1,94 @@
+---
+ami_name: "base-ubuntu18-py36*"
+instances:
+- name: p-backend-app-server-01
+  instance_type: c5a.xlarge
+  instance_role: EC2BaseRole
+  instance_tags:
+    gunicorn: true
+
+- name: p-backend-app-server-02
+  instance_type: c5a.xlarge
+  instance_role: EC2BaseRole
+  instance_tags:
+    gunicorn: true
+
+- name: p-backend-app-server-03
+  instance_type: c5a.xlarge
+  instance_role: EC2BaseRole
+  instance_tags:
+    gunicorn: true
+
+- name: p-backend-app-server-04
+  instance_type: c5a.xlarge
+  instance_role: EC2BaseRole
+  instance_tags:
+    gunicorn: true
+
+- name: p-backend-app-server-05
+  instance_type: c5a.xlarge
+  instance_role: EC2BaseRole
+  instance_tags:
+    gunicorn: true
+
+- name: p-backend-app-server-06
+  instance_type: c5a.xlarge
+  instance_role: EC2BaseRole
+  instance_tags:
+    gunicorn: true
+
+- name: p-backend-celery-beat-01
+  instance_type: t3a.medium
+  instance_role: EC2BaseRole
+  instance_tags:
+    beat: true
+
+- name: p-backend-celery-server-01
+  instance_type: c5a.4xlarge
+  instance_role: EC2BaseRole
+  instance_tags:
+    celery: true
+
+- name: p-backend-celery-server-03
+  instance_type: c5a.4xlarge
+  instance_role: EC2BaseRole
+  instance_tags:
+    celery: true
+
+- name: p-backend-faust-worker-01
+  instance_type: c5a.large
+  instance_role: EC2BaseRole
+  instance_tags:
+    worker: true
+
+- name: p-backend-memcached-01
+  instance_type: t3a.medium
+  instance_role: EC2BaseRole
+  instance_tags:
+    gunicorn: true
+
+- name: p-backend-migration-01
+  instance_type: t3a.micro
+  instance_role: EC2BaseRole
+  instance_tags:
+    gunicorn: false
+
+- name: p-backend-reserve-02
+  instance_type: m4.4xlarge
+  instance_role: EC2BaseRole
+  instance_tags:
+    gunicorn: false
+
+instance_group_name: backend_prod
+base_tags:
+  "Env": "prod"
+  "Service": "backend"
+  "Team": "backend"
+
+root_volume_size: 20
+additional_volume_size: 0
+is_public_ip_needed: false
+additional_volume_needed: false 
+is_mounting_volume_needed: false 
+nginx_needed: true
+add_deployment_cron: true
