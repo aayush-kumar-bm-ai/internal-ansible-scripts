@@ -1,0 +1,33 @@
+- hosts: localhost
+  gather_facts: false
+  vars_files:
+    - base_lts.yml
+    - ec2_vars.yml
+  tasks:
+    - name: Gather information about {{ ami_name }} AMIs
+      amazon.aws.ec2_ami_info:
+        owners: 294639299176
+        filters:
+          name: "{{ami_name}}"
+      register: ec2_ami
+
+    - name: Create an instance
+      include_role:
+        name: "../../../roles/ec2"
+      vars:
+        ami_id: "{{ ec2_ami.images[-1].image_id }}"
+        instance_name: "{{ item.name }}"
+        instance_role: "{{ item.instance_role }}"
+        instance_tags: "{{ item.instance_tags }}"
+        instance_type: "{{ item.instance_type }}"
+      with_items: "{{ instances }}"
+
+- hosts: payments_prod
+  vars_files:
+    - ec2_vars.yml
+    - filebeat_vars.yml
+  become: yes
+  tasks:
+    - name: Set up an instances
+      include_role:
+        name: "../../../roles/ec2_setup"
