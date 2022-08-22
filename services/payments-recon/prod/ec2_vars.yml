@@ -1,0 +1,28 @@
+---
+ami_name: "base-ubuntu18-py36*"
+instances:
+  - name: p-payments-recon-02
+    instance_type: t3a.medium
+    instance_role: EC2BaseRole
+    instance_tags: 
+      gunicorn: false
+      
+  - name: p-payments-recon-loadbalancer-01
+    instance_type: t3a.medium
+    instance_role: EC2BaseRole
+    instance_tags: 
+      gunicorn: false
+
+instance_group_name: payments_rec_prod
+base_tags:
+  "Env": "prod"
+  "Service": "payments_recon_service"
+  "Team": "payments"
+
+root_volume_size: 20
+additional_volume_size: 0
+is_public_ip_needed: false
+additional_volume_needed: false
+is_mounting_volume_needed: false
+nginx_needed: true
+add_deployment_cron: true
