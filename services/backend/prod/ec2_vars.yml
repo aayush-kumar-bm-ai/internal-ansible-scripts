@@ -49,7 +49,7 @@ instances:
   instance_tags:
     celery: true
 
-- name: p-backend-celery-server-03
+- name: p-backend-celery-server-02
   instance_type: c5a.4xlarge
   instance_role: EC2BaseRole
   instance_tags:
@@ -59,25 +59,25 @@ instances:
   instance_type: c5a.large
   instance_role: EC2BaseRole
   instance_tags:
-    worker: true
+    faust: true
 
-- name: p-backend-memcached-01
-  instance_type: t3a.medium
-  instance_role: EC2BaseRole
-  instance_tags:
-    gunicorn: true
+# - name: p-backend-memcached-01
+#   instance_type: t3a.medium
+#   instance_role: EC2BaseRole
+#   instance_tags:
+#     gunicorn: true
 
-- name: p-backend-migration-01
-  instance_type: t3a.micro
-  instance_role: EC2BaseRole
-  instance_tags:
-    gunicorn: false
+# - name: p-backend-migration-01
+#   instance_type: t3a.micro
+#   instance_role: EC2BaseRole
+#   instance_tags:
+#     gunicorn: false
 
-- name: p-backend-reserve-02
-  instance_type: m4.4xlarge
-  instance_role: EC2BaseRole
-  instance_tags:
-    gunicorn: false
+# - name: p-backend-reserve-02
+#   instance_type: m4.4xlarge
+#   instance_role: EC2BaseRole
+#   instance_tags:
+#     gunicorn: false
 
 instance_group_name: backend_prod
 base_tags:
