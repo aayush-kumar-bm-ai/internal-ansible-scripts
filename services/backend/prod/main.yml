@@ -16,8 +16,11 @@
     include_role:
       name: "../../../roles/ec2"
     vars:
-      instance_name: "{{ item.name }}"
       ami_id: "{{ ec2_ami.images[-1].image_id }}"
+      instance_name: "{{ item.name }}"
+      instance_role: "{{ item.instance_role }}"
+      instance_tags: "{{ item.instance_tags }}"
+      instance_type: "{{ item.instance_type }}"
     with_items: "{{ instances }}"
 
 - hosts: backend_prod
