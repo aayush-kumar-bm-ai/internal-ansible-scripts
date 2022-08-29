@@ -13,19 +13,19 @@ instances:
   #   instance_tags: 
   #     gunicorn: false
       
-  - name: p-payments-app-server-01
+  - name: px-payments-app-server-01
     instance_type: t3a.large
     instance_role: banking-payments-ec2-role
     instance_tags: 
       gunicorn: true
       
-  - name: p-payments-app-server-02
+  - name: px-payments-app-server-02
     instance_type: t3a.large
     instance_role: banking-payments-ec2-role
     instance_tags: 
       gunicorn: true
       
-  - name: p-payments-app-server-03
+  - name: px-payments-app-server-03
     instance_type: t3a.large
     instance_role: banking-payments-ec2-role
     instance_tags: 
@@ -37,25 +37,25 @@ instances:
   #   instance_tags: 
   #     gunicorn: false
       
-  - name: p-payments-beat-server-01
+  - name: px-payments-beat-server-01
     instance_type: t3a.micro
     instance_role: EC2BaseRole
     instance_tags: 
       beat: true
       
-  - name: p-payments-celery-server-01
+  - name: px-payments-celery-server-01
     instance_type: c5a.2xlarge
     instance_role: payments-batch-submission-feedback-role-rw
     instance_tags: 
       celery: true
       
-  - name: p-payments-celery-server-02
+  - name: px-payments-celery-server-02
     instance_type: c5a.2xlarge
     instance_role: payments-batch-submission-feedback-role-rw
     instance_tags: 
       celery: true
       
-  - name: p-payments-celery-server-03
+  - name: px-payments-celery-server-03
     instance_type: c5a.2xlarge
     instance_role: payments-batch-submission-feedback-role-rw
     instance_tags: 
@@ -67,7 +67,7 @@ instances:
   #   instance_tags: 
   #     gunicorn: false
       
-  - name: p-payments-kafka-consumer-01
+  - name: px-payments-kafka-consumer-01
     instance_type: t3a.medium
     instance_role: payments-batch-submission-feedback-role-rw
     instance_tags: 
@@ -79,7 +79,7 @@ instances:
   #   instance_tags: 
   #     gunicorn: false
       
-  - name: p-payments-migration-01
+  - name: px-payments-migration-01
     instance_type: t3a.micro
     instance_role: EC2BaseRole
     instance_tags: 
