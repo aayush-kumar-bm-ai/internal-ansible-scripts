@@ -1,17 +1,17 @@
 ---
 ami_name: "base-ubuntu18-py36*"
 instances:
-  - name: p-payments-05
-    instance_type: t3a.micro
-    instance_role: EC2BaseRole
-    instance_tags: 
-      gunicorn: false
+  # - name: p-payments-05
+  #   instance_type: t3a.micro
+  #   instance_role: EC2BaseRole
+  #   instance_tags: 
+  #     gunicorn: false
       
-  - name: p-payments-ach-01
-    instance_type: t3a.micro
-    instance_role: EC2BaseRole
-    instance_tags: 
-      gunicorn: false
+  # - name: p-payments-ach-01
+  #   instance_type: t3a.micro
+  #   instance_role: EC2BaseRole
+  #   instance_tags: 
+  #     gunicorn: false
       
   - name: p-payments-app-server-01
     instance_type: t3a.large
@@ -31,11 +31,11 @@ instances:
     instance_tags: 
       gunicorn: true
       
-  - name: p-payments-bastion-01
-    instance_type: t3a.micro
-    instance_role: EC2BaseRole
-    instance_tags: 
-      gunicorn: false
+  # - name: p-payments-bastion-01
+  #   instance_type: t3a.micro
+  #   instance_role: EC2BaseRole
+  #   instance_tags: 
+  #     gunicorn: false
       
   - name: p-payments-beat-server-01
     instance_type: t3a.micro
@@ -61,11 +61,11 @@ instances:
     instance_tags: 
       celery: true
       
-  - name: p-payments-gmail-client-02
-    instance_type: t3a.medium
-    instance_role: EC2BaseRole
-    instance_tags: 
-      gunicorn: false
+  # - name: p-payments-gmail-client-02
+  #   instance_type: t3a.medium
+  #   instance_role: EC2BaseRole
+  #   instance_tags: 
+  #     gunicorn: false
       
   - name: p-payments-kafka-consumer-01
     instance_type: t3a.medium
@@ -73,11 +73,11 @@ instances:
     instance_tags: 
       consumer: true
       
-  - name: p-payments-lb-01
-    instance_type: t3a.medium
-    instance_role: EC2BaseRole
-    instance_tags: 
-      gunicorn: false
+  # - name: p-payments-lb-01
+  #   instance_type: t3a.medium
+  #   instance_role: EC2BaseRole
+  #   instance_tags: 
+  #     gunicorn: false
       
   - name: p-payments-migration-01
     instance_type: t3a.micro
@@ -85,11 +85,11 @@ instances:
     instance_tags: 
       gunicorn: false
       
-  - name: p-payments-p2c-01
-    instance_type: t3a.large
-    instance_role: EC2BaseRole
-    instance_tags: 
-      gunicorn: false
+  # - name: p-payments-p2c-01
+  #   instance_type: t3a.large
+  #   instance_role: EC2BaseRole
+  #   instance_tags: 
+  #     gunicorn: false
 
 instance_group_name: payments_prod
 base_tags:

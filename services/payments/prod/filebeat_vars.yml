@@ -7,6 +7,6 @@ env: prod
 celery_logs_path: /app/logs/celery/*
 celery_beat_logs_path: /app/logs/celery_beat/*
 gunicorn_logs_path: /app/logs/gunicorn/gunicorn*.log*
-nginx_access_logs_path: /app/logs/nginx/access.log
-nginx_error_logs_path: /var/log/nginx/error.log
+nginx_access_logs_path: /app/logs/nginx/access.log.*
+nginx_error_logs_path: /var/log/nginx/error*
 ossec_logs_path: /app/ossec/logs/alerts/alerts.log
