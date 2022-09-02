@@ -27,9 +27,9 @@ LEVEL=`echo "${ALERTTEXT}" | head -1 | grep "(level [0-9]*)" | sed 's/^.*(level 
 COLOR="#D3D3D3"
 if [ "${LEVEL}" ]
 then
-  [ "${LEVEL}" -ge 4 ] && COLOR="#FFCC00" && SITE="https://hooks.slack.com/services/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" && CHANNEL="#ossec-critical"
-  [ "${LEVEL}" -ge 7 ] && COLOR="#FF9966" && SITE="https://hooks.slack.com/services/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" && CHANNEL="#ossec-critical"
-  [ "${LEVEL}" -ge 12 ] && COLOR="#CC3300" && SITE="https://hooks.slack.com/services/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" && CHANNEL="#ossec-critical"
+  [ "${LEVEL}" -ge 4 ] && COLOR="#FFCC00" && SITE="https://hooks.slack.com/services/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" && CHANNEL="#0-ossec-critical"
+  [ "${LEVEL}" -ge 7 ] && COLOR="#FF9966" && SITE="https://hooks.slack.com/services/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" && CHANNEL="#0-ossec-critical"
+  [ "${LEVEL}" -ge 12 ] && COLOR="#CC3300" && SITE="https://hooks.slack.com/services/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" && CHANNEL="#0-ossec-critical"
 fi
 # echo "${LEVEL} ${SITE}" >> ${PWD}/../logs/active-responses.log
 PAYLOAD='{"channel": "'"$CHANNEL"'", "username": "'"$SLACKUSER"'", "attachments": [ {"fallback": "'"$( printf "${ALERTTITLE}\n${ALERTTEXT}" )"'", "title": "'"${ALERTTITLE}"'", "text": "'"${ALERTTEXT}"'", "color": "'"${COLOR}"'"} ]}'
