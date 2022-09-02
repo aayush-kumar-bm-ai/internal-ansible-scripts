@@ -16,7 +16,7 @@ instances:
 instance_group_name: uaa_agg_prod
 base_tags:
   "Env": "prod"
-  "Service": "uaa_aggregator"
+  "Service": "uaa_aggregator_celery"
   "Team": "UAA"
 
 root_volume_size: 20
