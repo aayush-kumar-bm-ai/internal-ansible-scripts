@@ -1,5 +1,5 @@
 ---
-ami_name: "base-ubuntu18-py38*"
+ami_name: "base-ubuntu18-py36*"
 instances:
   - name: p-credit-app-server-01
     instance_type: t3a.large
@@ -24,12 +24,14 @@ instances:
     instance_role: bright-money-credit-s3-role
     instance_tags:
       celery: true
+      kafka: true
     
   - name: p-credit-celery-server-02
     instance_type: t3a.large
     instance_role: bright-money-credit-s3-role
     instance_tags:
       celery: true
+      kafka: true
     
   # - name: p-credit-loadbalancer-01
   #   instance_type: t3a.medium
@@ -37,11 +39,11 @@ instances:
   #   instance_tags:
   #     gunicorn: false
     
-  # - name: p-credit-migration-server-01
-  #   instance_type: t3a.micro
-  #   instance_role: EC2BaseRole
-  #   instance_tags:
-  #     gunicorn: false
+  - name: p-credit-migration-server-01
+    instance_type: t3a.micro
+    instance_role: EC2BaseRole
+    instance_tags:
+      gunicorn: false
     
 
 instance_group_name: credit_prod
