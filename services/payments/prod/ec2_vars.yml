@@ -49,13 +49,13 @@ instances:
     instance_tags: 
       celery: true
       
-  - name: px-payments-celery-server-02
+  - name: px-payments-celery-server-03
     instance_type: c5a.2xlarge
     instance_role: payments-batch-submission-feedback-role-rw
     instance_tags: 
       celery: true
       
-  - name: px-payments-celery-server-03
+  - name: px-payments-celery-server-04
     instance_type: c5a.2xlarge
     instance_role: payments-batch-submission-feedback-role-rw
     instance_tags: 
@@ -84,12 +84,6 @@ instances:
     instance_role: EC2BaseRole
     instance_tags: 
       gunicorn: false
-      
-  # - name: p-payments-p2c-01
-  #   instance_type: t3a.large
-  #   instance_role: EC2BaseRole
-  #   instance_tags: 
-  #     gunicorn: false
 
 instance_group_name: payments_prod
 base_tags:
