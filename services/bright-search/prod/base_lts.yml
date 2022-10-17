@@ -2,9 +2,9 @@
 instance_key_name: backend-16-08-19
 instance_role: EC2BaseRole
 instance_region: us-west-2
-vpc_subnet_id: subnet-06cb244de96f111a0
+vpc_subnet_id: subnet-05d0a8453b63687a4
 security_group_ids:
-  - sg-083fb3381195cd5a7
+  - sg-0abbb451f94d3f8cd
 root_volume_type: gp2
 additional_volume_type: gp2
 additional_volume_device_name: "/dev/sdd"
