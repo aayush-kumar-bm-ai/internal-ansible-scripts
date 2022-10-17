@@ -3,13 +3,13 @@ ami_name: "base-ubuntu18-py36*"
 instances:
   - name: "px-brightsearch-app-server-01"
     instance_type: t3.medium
-    instance_role: EC2BaseRole
+    instance_role: uaa-bright-search-s3-role
     instance_tags:
       gunicorn: true
 
   - name: "px-brightsearch-app-server-02"
     instance_type: t3.medium
-    instance_role: EC2BaseRole
+    instance_role: uaa-bright-search-s3-role
     instance_tags:
       gunicorn: true
 
