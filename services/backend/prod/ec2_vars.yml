@@ -25,7 +25,7 @@ instances:
   instance_tags:
     gunicorn: true
 
-- name: px-backend-celery-beat-01
+- name: px-backend-celery-beat-02
   instance_type: t3a.medium
   instance_role: EC2BaseRole
   instance_tags:
