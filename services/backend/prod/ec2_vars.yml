@@ -1,53 +1,59 @@
 ---
 ami_name: "base-ubuntu18-py36*"
 instances:
-- name: px-backend-app-server-01
-  instance_type: c5a.xlarge
-  instance_role: EC2BaseRole
-  instance_tags:
+# - name: px-backend-app-server-01
+#   instance_type: c5a.xlarge
+#   instance_role: EC2BaseRole
+#   instance_tags:
+#     gunicorn: true
+
+# - name: px-backend-app-server-02
+#   instance_type: c5a.xlarge
+#   instance_role: EC2BaseRole
+#   instance_tags:
+#     gunicorn: true
+
+# - name: px-backend-app-server-03
+#   instance_type: c5a.xlarge
+#   instance_role: EC2BaseRole
+#   instance_tags:
+#     gunicorn: true
+
+# - name: px-backend-app-server-04
+#   instance_type: c5a.xlarge
+#   instance_role: EC2BaseRole
+#   instance_tags:
+#     gunicorn: true
+
+ - name: p-backend-app-server-05
+   instance_type: c5a.xlarge
+   instance_role: EC2BaseRole
+   instance_tags:
     gunicorn: true
+    
+# - name: px-backend-celery-beat-02
+#   instance_type: t3a.medium
+#   instance_role: EC2BaseRole
+#   instance_tags:
+#     beat: true
 
-- name: px-backend-app-server-02
-  instance_type: c5a.xlarge
-  instance_role: EC2BaseRole
-  instance_tags:
-    gunicorn: true
+# - name: px-backend-celery-server-01
+#   instance_type: c5a.4xlarge
+#   instance_role: EC2BaseRole
+#   instance_tags:
+#     celery: true
 
-- name: px-backend-app-server-03
-  instance_type: c5a.xlarge
-  instance_role: EC2BaseRole
-  instance_tags:
-    gunicorn: true
+# - name: px-backend-celery-server-02
+#   instance_type: c5a.4xlarge
+#   instance_role: EC2BaseRole
+#   instance_tags:
+#     celery: true
 
-- name: px-backend-app-server-04
-  instance_type: c5a.xlarge
-  instance_role: EC2BaseRole
-  instance_tags:
-    gunicorn: true
-
-- name: px-backend-celery-beat-02
-  instance_type: t3a.medium
-  instance_role: EC2BaseRole
-  instance_tags:
-    beat: true
-
-- name: px-backend-celery-server-01
-  instance_type: c5a.4xlarge
-  instance_role: EC2BaseRole
-  instance_tags:
-    celery: true
-
-- name: px-backend-celery-server-02
-  instance_type: c5a.4xlarge
-  instance_role: EC2BaseRole
-  instance_tags:
-    celery: true
-
-- name: px-backend-faust-worker-01
-  instance_type: c5a.large
-  instance_role: EC2BaseRole
-  instance_tags:
-    faust: true
+# - name: px-backend-faust-worker-01
+#   instance_type: c5a.large
+#   instance_role: EC2BaseRole
+#   instance_tags:
+#     faust: true
 
 # - name: p-backend-memcached-01
 #   instance_type: t3a.medium
