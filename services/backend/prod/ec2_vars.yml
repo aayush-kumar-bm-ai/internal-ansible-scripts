@@ -24,12 +24,6 @@ instances:
 #   instance_role: EC2BaseRole
 #   instance_tags:
 #     gunicorn: true
-
- - name: p-backend-app-server-05
-   instance_type: c5a.xlarge
-   instance_role: EC2BaseRole
-   instance_tags:
-    gunicorn: true
     
 # - name: px-backend-celery-beat-02
 #   instance_type: t3a.medium
